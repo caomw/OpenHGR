@@ -25,7 +25,7 @@ Mat substractFace ( Mat in )
 
   for( int i = 0; i < faces.size(); i++ )
   {
-    // Rectangle
+    // Circle
     Point center ( faces[i].x + faces[i].width / 2.0, faces[i].y + faces[i].height / 2.0);
     circle( out, center, faces[i].width / 1.6, Scalar( 0, 0, 0), -1, 8 );
   }
@@ -45,6 +45,8 @@ int findBiggestContour(vector<vector<Point> > contours){
     return indexOfBiggestContour;
 }
 
+
+
 int main()
 {
    CvCapture* capture;
@@ -53,37 +55,71 @@ int main()
  //-- 1. Load the cascades
    if( !face_cascade.load( face_cascade_name ) ){ printf("--(!)Error loading\n"); return -1; };
 
-   //-- Read the video stream
-   capture = cvCaptureFromCAM( -1 );
-   if( capture )
+   int video = 1;
+
+   if ( video )
+   {
+       capture = cvCaptureFromFile("../data/benchmark1.avi");
+   }
+   else
+   {
+          //-- Read the video stream
+       capture = cvCaptureFromCAM( -1 );
+   //capture = cvCreateCameraCapture(1);
+   //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_WIDTH, 640 );
+   //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_HEIGHT, 480 );
+   }
+
+
+
+
+    if( capture )
    {
      while( true )
      {
-         frame = cvQueryFrame( capture );
-
+       f = cvQueryFrame( capture );
+       flip(f,frame,1);
        //-- 3. Apply the classifier to the frame
        if( !frame.empty() )
        {
-           f = frame.clone ( );
            frame = substractFace(frame);
            cvtColor ( frame, hsv, CV_BGR2HSV);
-           inRange(hsv, Scalar(0,  10, 60), Scalar(20, 150, 255), bw);
+           blur( hsv, hsv, Size(3,3) );
 
 
-           Mat canny_output;
+           inRange(hsv, Scalar(0,  50, 0), Scalar(20, 190, 255), bw);
+           erode (bw, bw, cv::Mat(), cv::Point(-1,-1), 2);
+           dilate (bw, bw, cv::Mat(), cv::Point(-1,-1), 1);
+            blur(bw,bw,Size(3,3));//cvSmooth (bw,bw, CV_MEDIAN, 3, 1);
+            imshow("Threshold", bw);
+
+
+
+            Mat canny_output;
             vector<vector<Point> > contours;
             vector<Vec4i> hierarchy;
 
-            findContours( bw, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
-            int s = findBiggestContour(contours);
+            Canny( bw, canny_output, 50, 50*2, 3 );
+            findContours( canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+            //dint s = findBiggestContour(contours);
+
+            imshow("Canny", canny_output);
 
             Mat drawing = Mat::zeros( frame.size(), CV_8UC1 );
-            drawContours( frame, contours, s, Scalar(255), -1, 8, hierarchy, 0, Point() );
+            for( int i = 0; i< contours.size(); i++ )
+            {
+               Scalar color = Scalar( rand()%255, rand()%255, rand()%255 );
+               drawContours( frame, contours, i, color, 2, 8, hierarchy, 0, Point() );
+            }
+
+            //for ( int s = 0; s < contours.size(); s ++ )
+              //drawContours( frame, contours, s, Scalar(rand() % 255,rand() % 255,rand() % 255), -1, 8, hierarchy, 0, Point() );
+
+              //drawContours( frame, contours, s, Scalar(255), -1, 8, hierarchy, 0, Point() );
 
 
 
-
-           imshow( "aaa", frame );
+           imshow( "aaa", frame);
 
        }
        else
