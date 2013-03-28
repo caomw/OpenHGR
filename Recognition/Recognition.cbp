@@ -5,6 +5,7 @@
 		<Option title="Recognition" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="FaceSubstraction/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="../Debug/Recognition/bin/Recognition" prefix_auto="1" extension_auto="1" />
@@ -36,7 +37,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/IFaceSubstractor.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/IFaceSubstractor.cpp">
+			<Option virtualFolder="FaceSubstraction/" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />
