@@ -18,24 +18,24 @@ ContourComparisonHandDetector::~ContourComparisonHandDetector()
 
 cv::Rect ContourComparisonHandDetector::detectHand ( cv::Mat input )
 {
-
     Mat canny_output;
     vector<vector<Point> > contours;
     vector<Vec4i> hierarchy;
 
-    Canny( input, canny_output, 50, 50*2, 3 );
+    Canny( input, canny_output, 100, 100*2, 3 );
     findContours( canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
-    //dint s = findBiggestContour(contours);
 
     if ( isDebug())
-        imshow("Canny", canny_output);
-
-    Mat drawing = Mat::zeros( input.size(), CV_8UC1 );
-    for( int i = 0; i< contours.size(); i++ )
     {
-       Scalar color = Scalar( rand()%255, rand()%255, rand()%255 );
-       drawContours( input, contours, i, color, 2, 8, hierarchy, 0, Point() );
+        Mat drawing = Mat::zeros( input.size(), CV_8UC3 );
+        for( int i = 0; i< contours.size(); i++ )
+        {
+           Scalar color = Scalar( rand()%255, rand()%255, rand()%255 );
+           drawContours( drawing, contours, i, color, 2, 8, hierarchy, 0, Point() );
+        }
+        imshow("Drawing", drawing);
     }
+
 
     return cv::Rect(0,0,1,1);
 }

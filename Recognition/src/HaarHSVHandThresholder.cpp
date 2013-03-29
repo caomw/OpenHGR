@@ -17,28 +17,20 @@ HaarHSVHandThresholder::HaarHSVHandThresholder()
 
 cv::Mat HaarHSVHandThresholder::thresholdHand ( cv::Mat input )
 {
-    Mat hsv, bw, bw2, cannyOutput;
+    Mat hsv, bw;
     Mat frame = substractFace (input);
 
     cvtColor ( frame, hsv, CV_BGR2HSV);
     inRange(hsv, minHSV, maxHSV, bw);
-    //blur(bw,bw,Size(3,3));
 
-    // Enlever les trous >> Marche mal
+    // Remove holes
     Mat element = getStructuringElement( MORPH_RECT, Size( 2*erosionSize + 1, 2*erosionSize+1 ),Point( erosionSize,erosionSize ) );
-    erode (bw, bw, element);
-    dilate (bw, bw, element);
-
-
-    bitwise_not(bw,bw2);
-    vector<vector<Point> > contours;
-    vector<Vec4i> hierarchy;
-    Canny( bw2, cannyOutput, 50, 50*2, 3 );
-
-    findContours( cannyOutput, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
-
-    for( int i = 0; i< contours.size(); i++ )
-        drawContours( bw, contours, i, Scalar(255), -1, 8, hierarchy, 0, Point() );
+    for ( int i = 0; i < holeFillingIterations; i ++ )
+    {
+        erode (bw, bw, element);
+        fillHoles(bw);
+        dilate(bw,bw, element);
+    }
 
     if ( isDebug() )
         imshow("HaarHSVHandThresholder", bw);
@@ -64,6 +56,20 @@ Mat HaarHSVHandThresholder::substractFace ( Mat input )
       }
 
       return input;
+}
+
+void HaarHSVHandThresholder::fillHoles ( Mat input )
+{
+    Mat im, cannyOutput;
+    vector<vector<Point> > contours;
+    vector<Vec4i> hierarchy;
+
+    blur(input,im, Size(3,3));
+    Canny( im, cannyOutput, cannyThreshold, cannyThreshold*2, 3 );
+    findContours( cannyOutput, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+
+    for( int i = 0; i< contours.size(); i++ )
+        drawContours( input, contours, i, Scalar(255), CV_FILLED, 8 );
 }
 
 HaarHSVHandThresholder::~HaarHSVHandThresholder()

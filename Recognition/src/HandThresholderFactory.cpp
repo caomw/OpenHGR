@@ -1,4 +1,4 @@
-#include "HandThresholderFactory.h"
+#include <HandThresholderFactory.h>
 #include <HaarHSVHandThresholder.h>
 #include <HaarHistogramHSVHandThresholder.h>
 
