@@ -17,7 +17,7 @@ HaarHSVHandThresholder::HaarHSVHandThresholder()
 
 cv::Mat HaarHSVHandThresholder::thresholdHand ( cv::Mat input )
 {
-    Mat hsv, bw;
+    Mat hsv, bw, bw2, cannyOutput;
     Mat frame = substractFace (input);
 
     cvtColor ( frame, hsv, CV_BGR2HSV);
@@ -28,6 +28,17 @@ cv::Mat HaarHSVHandThresholder::thresholdHand ( cv::Mat input )
     Mat element = getStructuringElement( MORPH_RECT, Size( 2*erosionSize + 1, 2*erosionSize+1 ),Point( erosionSize,erosionSize ) );
     erode (bw, bw, element);
     dilate (bw, bw, element);
+
+
+    bitwise_not(bw,bw2);
+    vector<vector<Point> > contours;
+    vector<Vec4i> hierarchy;
+    Canny( bw2, cannyOutput, 50, 50*2, 3 );
+
+    findContours( cannyOutput, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+
+    for( int i = 0; i< contours.size(); i++ )
+        drawContours( bw, contours, i, Scalar(255), -1, 8, hierarchy, 0, Point() );
 
     if ( isDebug() )
         imshow("HaarHSVHandThresholder", bw);
