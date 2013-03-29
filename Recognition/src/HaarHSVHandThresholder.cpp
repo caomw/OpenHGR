@@ -13,17 +13,21 @@ HaarHSVHandThresholder::HaarHSVHandThresholder()
         printf("--(!)Error loading\n");
 }
 
+
+
 cv::Mat HaarHSVHandThresholder::thresholdHand ( cv::Mat input )
 {
     Mat hsv, bw;
     Mat frame = substractFace (input);
-    cvtColor ( frame, hsv, CV_BGR2HSV);
-    blur( hsv, hsv, Size(3,3) );
 
-    inRange(hsv, Scalar(0,  50, 0), Scalar(20, 190, 255), bw);
-    erode (bw, bw, cv::Mat(), cv::Point(-1,-1), 2);
-    dilate (bw, bw, cv::Mat(), cv::Point(-1,-1), 1);
-    blur(bw,bw,Size(3,3));
+    cvtColor ( frame, hsv, CV_BGR2HSV);
+    inRange(hsv, minHSV, maxHSV, bw);
+    //blur(bw,bw,Size(3,3));
+
+    // Enlever les trous >> Marche mal
+    Mat element = getStructuringElement( MORPH_RECT, Size( 2*erosionSize + 1, 2*erosionSize+1 ),Point( erosionSize,erosionSize ) );
+    erode (bw, bw, element);
+    dilate (bw, bw, element);
 
     if ( isDebug() )
         imshow("HaarHSVHandThresholder", bw);

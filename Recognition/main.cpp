@@ -11,21 +11,6 @@
 using namespace std;
 using namespace cv;
 
-
-int findBiggestContour(vector<vector<Point> > contours){
-    int indexOfBiggestContour = -1;
-    int sizeOfBiggestContour = 0;
-    for (int i = 0; i < contours.size(); i++){
-        if(contours[i].size() > sizeOfBiggestContour){
-            sizeOfBiggestContour = contours[i].size();
-            indexOfBiggestContour = i;
-        }
-    }
-    return indexOfBiggestContour;
-}
-
-
-
 int main()
 {
    CvCapture* capture;
@@ -48,36 +33,21 @@ int main()
    {
           //-- Read the video stream
        capture = cvCaptureFromCAM( -1 );
-   //capture = cvCreateCameraCapture(1);
-   //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_WIDTH, 640 );
-   //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_HEIGHT, 480 );
+       //capture = cvCreateCameraCapture(1);
+       //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_WIDTH, 640 );
+       //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_HEIGHT, 480 );
    }
 
-
-
-
-    if( capture )
+   if( capture )
    {
      while( true )
      {
        f = cvQueryFrame( capture );
        flip(f,frame,1);
-       //-- 3. Apply the classifier to the frame
        if( !frame.empty() )
        {
            frame = handThresholder->thresholdHand(frame);
            handDetector->detectHand(frame);
-
-           /*
-
-
-
-
-
-
-
-           imshow( "aaa", frame);
-*/
        }
        else
        { printf(" --(!) No captured frame -- Break!"); break; }
