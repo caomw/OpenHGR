@@ -7,7 +7,12 @@ HandThresholderFactory::HandThresholderFactory()
     //ctor
 }
 
-AbstractHandThresholder* getHandThresholder ( int type )
+HandThresholderFactory::~HandThresholderFactory()
+{
+    //ctor
+}
+
+AbstractHandThresholder* HandThresholderFactory::createInstance ( HandThresholderType type )
 {
     switch ( type )
     {
@@ -17,3 +22,5 @@ AbstractHandThresholder* getHandThresholder ( int type )
         default: return new HaarHSVHandThresholder ();
     }
 }
+
+

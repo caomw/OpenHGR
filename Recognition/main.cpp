@@ -6,6 +6,7 @@
 
 #include <AbstractHandThresholder.h>
 #include <HandThresholderFactory.h>
+#include <ContourComparisonHandDetector.h>
 
 using namespace std;
 using namespace cv;
@@ -30,9 +31,13 @@ int main()
    CvCapture* capture;
    Mat frame, f, hsv, bw;
 
+   HandThresholderFactory htf;
 
-   AbstractHandThresholder* handThresholder = (new HandThresholderFactory())->getHandThresholder(HAAR_HSV);
+   AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_HSV);
+   ContourComparisonHandDetector* handDetector = new ContourComparisonHandDetector();
+
    handThresholder->setDebug(1);
+   handDetector->setDebug(1);
    int video = 1;
 
    if ( video )
@@ -61,33 +66,13 @@ int main()
        if( !frame.empty() )
        {
            frame = handThresholder->thresholdHand(frame);
-
+           handDetector->detectHand(frame);
 
            /*
 
 
 
-            Mat canny_output;
-            vector<vector<Point> > contours;
-            vector<Vec4i> hierarchy;
 
-            Canny( bw, canny_output, 50, 50*2, 3 );
-            findContours( canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
-            //dint s = findBiggestContour(contours);
-
-            imshow("Canny", canny_output);
-
-            Mat drawing = Mat::zeros( frame.size(), CV_8UC1 );
-            for( int i = 0; i< contours.size(); i++ )
-            {
-               Scalar color = Scalar( rand()%255, rand()%255, rand()%255 );
-               drawContours( frame, contours, i, color, 2, 8, hierarchy, 0, Point() );
-            }
-
-            //for ( int s = 0; s < contours.size(); s ++ )
-              //drawContours( frame, contours, s, Scalar(rand() % 255,rand() % 255,rand() % 255), -1, 8, hierarchy, 0, Point() );
-
-              //drawContours( frame, contours, s, Scalar(255), -1, 8, hierarchy, 0, Point() );
 
 
 

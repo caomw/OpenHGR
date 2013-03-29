@@ -3,15 +3,16 @@
 
 #include <AbstractHandThresholder.h>
 
+enum HandThresholderType { HAAR_HSV, HAAR_HISTOGRAM_HSV };
+
 class HandThresholderFactory
 {
     public:
         HandThresholderFactory();
-        AbstractHandThresholder* getHandThresholder ( int type );
+        ~HandThresholderFactory();
+        AbstractHandThresholder* createInstance ( HandThresholderType type );
     protected:
     private:
 };
-
- enum { HAAR_HSV, HAAR_HISTOGRAM_HSV } HandThresholderType;
 
 #endif // HANDTHRESHOLDERFACTORY_H

@@ -1,20 +1,15 @@
 #ifndef ABSTRACTHANDTHRESHOLDER_H
 #define ABSTRACTHANDTHRESHOLDER_H
+#include <AbstractFilter.h>
 
 #include "opencv2/objdetect/objdetect.hpp"
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
 
-class AbstractHandThresholder
+class AbstractHandThresholder : public AbstractFilter
 {
     public:
-        AbstractHandThresholder();
-        virtual cv::Mat thresholdHand ( cv::Mat input );
-        void setDebug (char debug);
+        virtual cv::Mat thresholdHand ( cv::Mat input ) = 0;
     protected:
-        char isDebug ();
     private:
-        char debug = 0;
 };
 
 #endif // ABSTRACTHANDTHRESHOLDER_H

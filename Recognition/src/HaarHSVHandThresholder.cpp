@@ -1,6 +1,9 @@
 #include "HaarHSVHandThresholder.h"
 #include <iostream>
 #include <stdio.h>
+#include "opencv2/objdetect/objdetect.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
 
 using namespace cv;
 
@@ -20,7 +23,7 @@ cv::Mat HaarHSVHandThresholder::thresholdHand ( cv::Mat input )
     inRange(hsv, Scalar(0,  50, 0), Scalar(20, 190, 255), bw);
     erode (bw, bw, cv::Mat(), cv::Point(-1,-1), 2);
     dilate (bw, bw, cv::Mat(), cv::Point(-1,-1), 1);
-    blur(bw,bw,Size(3,3));//cvSmooth (bw,bw, CV_MEDIAN, 3, 1);
+    blur(bw,bw,Size(3,3));
 
     if ( isDebug() )
         imshow("HaarHSVHandThresholder", bw);
