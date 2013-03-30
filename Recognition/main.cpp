@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdio.h>
+#include <unistd.h>
 
 // OpenCV includes
 #include "opencv2/highgui/highgui.hpp"
@@ -47,10 +48,16 @@ int main()
         {
             f = cvQueryFrame( capture );
             flip(f,frame,1);
+
+            Mat f2 = frame.clone();
+
             if( !frame.empty() )
             {
                 frame = handThresholder->thresholdHand(frame);
-                handDetector->detectHand(frame);
+                Rect handRect = handDetector->detectHand(frame);
+
+                rectangle(f2, Point(handRect.x, handRect.y), Point(handRect.x+handRect.width, handRect.y+handRect.height), Scalar(0,0,255), 2, 8 );
+                imshow("Main", f2);
             }
             else
             {

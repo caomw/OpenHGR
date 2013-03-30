@@ -18,21 +18,17 @@ class HaarHSVHandThresholder : public AbstractHandThresholder
     private:
         void fillHoles ( cv::Mat input );
 
-
+        // Face detection
         std::string face_cascade_name = "haarcascade_frontalface_alt.xml";
-        int erosionSize = 1;
-        int cannyThreshold = 50;
-        int holeFillingIterations = 3;
+        cv::CascadeClassifier face_cascade;
 
         // Morphology parameters
         int morph_elem = cv::MORPH_ELLIPSE;
         int morph_size = 6;
 
+        // HSV threshold
         cv::Scalar minHSV = cv::Scalar(0,  50, 0);
         cv::Scalar maxHSV = cv::Scalar(20, 190, 255);
-
-        cv::CascadeClassifier face_cascade;
-
 };
 
 #endif // HAARHSVHANDTHRESHOLDER_H

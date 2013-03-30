@@ -51,7 +51,7 @@ Mat HaarHSVHandThresholder::substractFace ( Mat input )
     {
         // Circle
         Point center ( faces[i].x + faces[i].width / 2.0, faces[i].y + faces[i].height / 2.0);
-        circle( input, center, faces[i].width / 1.6, Scalar( 0, 0, 0), -1, 8 );
+        circle( input, center, faces[i].width / 1.4, Scalar( 0, 0, 0), -1, 8 );
     }
 
     return input;

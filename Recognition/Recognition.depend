@@ -1,7 +1,8 @@
 # depslib dependency file v1.0
-1364597236 source:/home/mathieu/Desktop/OpenHGR/Recognition/main.cpp
+1364673793 source:/home/mathieu/Desktop/OpenHGR/Recognition/main.cpp
 	<iostream>
 	<stdio.h>
+	<unistd.h>
 	"opencv2/highgui/highgui.hpp"
 	"opencv2/imgproc/imgproc.hpp"
 	<AbstractHandThresholder.h>
@@ -97,13 +98,13 @@
 	"opencv2/highgui/highgui.hpp"
 	"opencv2/imgproc/imgproc.hpp"
 
-1364669320 /home/mathieu/Desktop/OpenHGR/Recognition/include/HaarHSVHandThresholder.h
+1364670559 /home/mathieu/Desktop/OpenHGR/Recognition/include/HaarHSVHandThresholder.h
 	<AbstractHandThresholder.h>
 	<iostream>
 	<stdio.h>
 	"opencv2/imgproc/imgproc.hpp"
 
-1364669175 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HaarHSVHandThresholder.cpp
+1364672612 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HaarHSVHandThresholder.cpp
 	"HaarHSVHandThresholder.h"
 	<iostream>
 	<stdio.h>
@@ -165,7 +166,7 @@
 	<AbstractFilter.h>
 	"opencv2/objdetect/objdetect.hpp"
 
-1364668380 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/ContourComparisonHandDetector.cpp
+1364675226 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/ContourComparisonHandDetector.cpp
 	"ContourComparisonHandDetector.h"
 	"opencv2/objdetect/objdetect.hpp"
 	"opencv2/highgui/highgui.hpp"

@@ -26,12 +26,27 @@ cv::Rect ContourComparisonHandDetector::detectHand ( cv::Mat input )
     Mat canny_output;
     vector<vector<Point> > contours;
     vector<Vec4i> hierarchy;
+    int biggestContour = 0;
+    Rect handRect(0,0,0,0);
 
     Canny( input, canny_output, 100, 100*2, 3 );
     findContours( canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
 
+    for ( int i = 0; i < contours.size(); i ++ )
+            for ( int j = 0; j < templates.size(); j ++ )
+            {
+                double match = matchShapes ( contours[i], templates[j], CV_CONTOURS_MATCH_I3, 0 );
+                if ( match < 0.3 && match > 0 )
+                {
+                    Rect r = boundingRect(contours[i]);
+                    if ( r.width*r.height >= biggestContour )
+                    {
+                        biggestContour = r.width*r.height;
+                        handRect = r;
+                    }
+                }
 
-
+            }
 
     if ( isDebug())
     {
@@ -43,26 +58,12 @@ cv::Rect ContourComparisonHandDetector::detectHand ( cv::Mat input )
            drawContours( drawing, contours, i, color, 2, 8, hierarchy, 0, Point() );
         }
 
-        for ( int i = 0; i < contours.size(); i ++ )
-        for ( int j = 0; j < templates.size(); j ++ )
-        {
-            double match = cv::matchShapes ( contours[i], templates[j], CV_CONTOURS_MATCH_I3, 0 );
-            if ( match < 0.4 && match > 0 )
-            {
-                cout << match << ":" << boundingRect(contours[i]).width << endl;
-                Rect rect = boundingRect(contours[i]);
-                rectangle(drawing, Point(rect.x, rect.y), Point(rect.x+rect.width, rect.y+rect.height), Scalar(255), 2, 8 );
-            }
-        }
+        rectangle(drawing, Point(handRect.x, handRect.y), Point(handRect.x+handRect.width, handRect.y+handRect.height), Scalar(0,0,255), 2, 8 );
 
-
-
-
-
-        imshow("Drawing", drawing);
+        imshow("ContourComparisonHandDetector", drawing);
     }
 
-    return cv::Rect(0,0,1,1);
+    return handRect;
 }
 
 void ContourComparisonHandDetector::loadTemplates ()
