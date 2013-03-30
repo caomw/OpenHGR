@@ -17,6 +17,8 @@ class ContourComparisonHandDetector : public AbstractHandDetector
 
         std::string templates_path = "../data/Templates";
         std::vector<std::vector<cv::Point> > templates;
+
+        double shapeMatchThreshold = 0.4;
 };
 
 #endif // CONTOURCOMPARISONHANDDETECTOR_H

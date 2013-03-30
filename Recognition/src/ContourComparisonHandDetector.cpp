@@ -36,7 +36,7 @@ cv::Rect ContourComparisonHandDetector::detectHand ( cv::Mat input )
             for ( int j = 0; j < templates.size(); j ++ )
             {
                 double match = matchShapes ( contours[i], templates[j], CV_CONTOURS_MATCH_I3, 0 );
-                if ( match < 0.3 && match > 0 )
+                if ( match < shapeMatchThreshold && match > 0 )
                 {
                     Rect r = boundingRect(contours[i]);
                     if ( r.width*r.height >= biggestContour )
