@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1364675355 source:/home/mathieu/Desktop/OpenHGR/Recognition/main.cpp
+1364679322 source:/home/mathieu/Desktop/OpenHGR/Recognition/main.cpp
 	<iostream>
 	<stdio.h>
 	<unistd.h>
@@ -166,7 +166,7 @@
 	<AbstractFilter.h>
 	"opencv2/objdetect/objdetect.hpp"
 
-1364675226 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/ContourComparisonHandDetector.cpp
+1364676457 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/ContourComparisonHandDetector.cpp
 	"ContourComparisonHandDetector.h"
 	"opencv2/objdetect/objdetect.hpp"
 	"opencv2/highgui/highgui.hpp"
@@ -175,7 +175,7 @@
 	<iostream>
 	<stdio.h>
 
-1364618940 /home/mathieu/Desktop/OpenHGR/Recognition/include/ContourComparisonHandDetector.h
+1364676450 /home/mathieu/Desktop/OpenHGR/Recognition/include/ContourComparisonHandDetector.h
 	<AbstractHandDetector.h>
 
 1364589433 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HandDetectorFactory.cpp
@@ -265,4 +265,23 @@
 
 1364580231 /home/frederick/Code/OpenHGR/Recognition/src/HaarHistogramHSVHandThresholder.h
 	<AbstractHandThresholder.h>
+
+1364680578 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/SIFTGestureRecognizer.cpp
+	"SIFTGestureRecognizer.h"
+
+1364680548 /home/mathieu/Desktop/OpenHGR/Recognition/include/SIFTGestureRecognizer.h
+	<AbstractGestureRecognizer.h>
+
+1364680221 /home/mathieu/Desktop/OpenHGR/Recognition/include/AbstractGestureRecognizer.h
+	<AbstractFilter.h>
+	"opencv2/imgproc/imgproc.hpp"
+	<stdio.h>
+
+1364680653 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/GestureRecognizerFactory.cpp
+	"GestureRecognizerFactory.h"
+	<AbstractGestureRecognizer.h>
+	<SIFTGestureRecognizer.h>
+
+1364680395 /home/mathieu/Desktop/OpenHGR/Recognition/include/GestureRecognizerFactory.h
+	<AbstractGestureRecognizer.h>
 

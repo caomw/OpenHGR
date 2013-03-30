@@ -9,8 +9,10 @@
 // Filter/Filter factories includes
 #include <AbstractHandThresholder.h>
 #include <AbstractHandDetector.h>
+#include <AbstractGestureRecognizer.h>
 #include <HandThresholderFactory.h>
 #include <HandDetectorFactory.h>
+#include <GestureRecognizerFactory.h>
 
 using namespace std;
 using namespace cv;
@@ -18,21 +20,24 @@ using namespace cv;
 int main()
 {
    CvCapture* capture;
-   Mat frame, f, hsv, bw;
+   Mat frame, f, thresholdFrame;
 
    HandThresholderFactory htf;
    HandDetectorFactory hdf;
+   GestureRecognizerFactory grf;
 
    AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_HSV);
    AbstractHandDetector* handDetector = hdf.createInstance(CONTOUR_COMPARISON);
+   AbstractGestureRecognizer* gestureRecognizer = grf.createInstance(SIFT);
 
    handThresholder->setDebug(1);
    handDetector->setDebug(1);
+
    int video = 1;
 
    if ( video )
    {
-       capture = cvCaptureFromFile("../data/benchmark1.avi");
+       capture = cvCaptureFromFile("../data/Benchmark-Fred.avi");
    }
    else
    {
@@ -49,15 +54,16 @@ int main()
             f = cvQueryFrame( capture );
             flip(f,frame,1);
 
-            Mat f2 = frame.clone();
-
             if( !frame.empty() )
             {
-                frame = handThresholder->thresholdHand(frame);
-                Rect handRect = handDetector->detectHand(frame);
+                thresholdFrame = handThresholder->thresholdHand(frame);
+                Rect handRect = handDetector->detectHand(thresholdFrame);
+                string gesture = gestureRecognizer->recognizeGesture(frame, handRect);
 
-                rectangle(f2, Point(handRect.x, handRect.y), Point(handRect.x+handRect.width, handRect.y+handRect.height), Scalar(0,0,255), 2, 8 );
-                imshow("Main", f2);
+                cout << gesture << endl;
+
+                rectangle(frame, Point(handRect.x, handRect.y), Point(handRect.x+handRect.width, handRect.y+handRect.height), Scalar(0,0,255), 2, 8 );
+                imshow("Main", frame);
             }
             else
             {
