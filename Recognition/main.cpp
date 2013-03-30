@@ -19,33 +19,37 @@ using namespace cv;
 
 int main()
 {
-   CvCapture* capture;
-   Mat frame, f, thresholdFrame;
+    CvCapture* capture;
+    Mat frame, f, thresholdFrame;
 
-   HandThresholderFactory htf;
-   HandDetectorFactory hdf;
-   GestureRecognizerFactory grf;
+    // Filter factories
+    HandThresholderFactory htf;
+    HandDetectorFactory hdf;
+    GestureRecognizerFactory grf;
 
-   AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_HSV);
-   AbstractHandDetector* handDetector = hdf.createInstance(CONTOUR_COMPARISON);
-   AbstractGestureRecognizer* gestureRecognizer = grf.createInstance(SIFT);
+    // Filters
+    AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_HSV);
+    AbstractHandDetector* handDetector = hdf.createInstance(CONTOUR_COMPARISON);
+    AbstractGestureRecognizer* gestureRecognizer = grf.createInstance(SIFT);
 
-   handThresholder->setDebug(1);
-   handDetector->setDebug(1);
+    // Debugging
+    handThresholder->setDebug(1);
+    handDetector->setDebug(1);
+    gestureRecognizer->setDebug(1);
 
-   int video = 1;
+    int video = 1;
 
-   if ( video )
-   {
-       capture = cvCaptureFromFile("../data/Benchmark-Fred.avi");
-   }
-   else
-   {
-       capture = cvCaptureFromCAM( -1 );
-       //capture = cvCreateCameraCapture(1);
-       //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_WIDTH, 640 );
-       //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_HEIGHT, 480 );
-   }
+    if ( video )
+    {
+        capture = cvCaptureFromFile("../data/benchmark1.avi");
+    }
+    else
+    {
+        capture = cvCaptureFromCAM( -1 );
+        //capture = cvCreateCameraCapture(1);
+        //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_WIDTH, 640 );
+        //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_HEIGHT, 480 );
+    }
 
     if ( capture )
     {

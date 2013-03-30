@@ -39,6 +39,8 @@ cv::Mat HaarHSVHandThresholder::thresholdHand ( cv::Mat input )
 Mat HaarHSVHandThresholder::substractFace ( Mat input )
 {
     std::vector<Rect> faces;
+    Mat output = input.clone();
+
     Mat frame_gray;
 
     cvtColor( input, frame_gray, CV_BGR2GRAY );
@@ -51,10 +53,10 @@ Mat HaarHSVHandThresholder::substractFace ( Mat input )
     {
         // Circle
         Point center ( faces[i].x + faces[i].width / 2.0, faces[i].y + faces[i].height / 2.0);
-        circle( input, center, faces[i].width / 1.4, Scalar( 0, 0, 0), -1, 8 );
+        circle( output, center, faces[i].width / 1.4, Scalar( 0, 0, 0), -1, 8 );
     }
 
-    return input;
+    return output;
 }
 
 HaarHSVHandThresholder::~HaarHSVHandThresholder()

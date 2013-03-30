@@ -12,6 +12,7 @@ class SIFTGestureRecognizer : public AbstractGestureRecognizer
         virtual std::string recognizeGesture ( cv::Mat input, cv::Rect roi );
     protected:
     private:
+        int miniatureSize = 100;
 };
 
 #endif // SIFTGESTURERECOGNIZER_H
