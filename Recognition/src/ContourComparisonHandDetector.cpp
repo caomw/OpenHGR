@@ -36,6 +36,7 @@ cv::Rect ContourComparisonHandDetector::detectHand ( cv::Mat input )
     if ( isDebug())
     {
         Mat drawing = Mat::zeros( input.size(), CV_8UC3 );
+
         for( int i = 0; i< contours.size(); i++ )
         {
            Scalar color = Scalar( rand()%255, rand()%255, rand()%255 );

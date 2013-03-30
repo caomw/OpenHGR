@@ -5,6 +5,8 @@
 #include <iostream>
 #include <stdio.h>
 
+#include "opencv2/imgproc/imgproc.hpp"
+
 class HaarHSVHandThresholder : public AbstractHandThresholder
 {
     public:
@@ -21,6 +23,10 @@ class HaarHSVHandThresholder : public AbstractHandThresholder
         int erosionSize = 1;
         int cannyThreshold = 50;
         int holeFillingIterations = 3;
+
+        // Morphology parameters
+        int morph_elem = cv::MORPH_ELLIPSE;
+        int morph_size = 6;
 
         cv::Scalar minHSV = cv::Scalar(0,  50, 0);
         cv::Scalar maxHSV = cv::Scalar(20, 190, 255);
