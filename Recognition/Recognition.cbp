@@ -45,12 +45,14 @@
 		<Unit filename="include/ContourComparisonHandDetector.h" />
 		<Unit filename="include/HaarHSVHandThresholder.h" />
 		<Unit filename="include/HaarHistogramHSVHandThresholder.h" />
+		<Unit filename="include/HandDetectorFactory.h" />
 		<Unit filename="include/HandThresholderFactory.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/AbstractFilter.cpp" />
 		<Unit filename="src/ContourComparisonHandDetector.cpp" />
 		<Unit filename="src/HaarHSVHandThresholder.cpp" />
 		<Unit filename="src/HaarHistogramHSVHandThresholder.cpp" />
+		<Unit filename="src/HandDetectorFactory.cpp" />
 		<Unit filename="src/HandThresholderFactory.cpp" />
 		<Extensions>
 			<code_completion />

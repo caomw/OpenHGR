@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1364589731 source:/home/mathieu/Desktop/OpenHGR/Recognition/main.cpp
+1364597236 source:/home/mathieu/Desktop/OpenHGR/Recognition/main.cpp
 	<iostream>
 	<stdio.h>
 	"opencv2/highgui/highgui.hpp"
@@ -164,13 +164,16 @@
 	<AbstractFilter.h>
 	"opencv2/objdetect/objdetect.hpp"
 
-1364589043 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/ContourComparisonHandDetector.cpp
+1364621150 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/ContourComparisonHandDetector.cpp
 	"ContourComparisonHandDetector.h"
 	"opencv2/objdetect/objdetect.hpp"
 	"opencv2/highgui/highgui.hpp"
 	"opencv2/imgproc/imgproc.hpp"
+	<dirent.h>
+	<iostream>
+	<stdio.h>
 
-1364535944 /home/mathieu/Desktop/OpenHGR/Recognition/include/ContourComparisonHandDetector.h
+1364618940 /home/mathieu/Desktop/OpenHGR/Recognition/include/ContourComparisonHandDetector.h
 	<AbstractHandDetector.h>
 
 1364589433 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HandDetectorFactory.cpp
