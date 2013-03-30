@@ -10,22 +10,24 @@ using namespace std;
 
 HaarHistogramHSVHandThresholder::HaarHistogramHSVHandThresholder()
 {
-    //ctor
+     if( !face_cascade.load( face_cascade_name ) )
+        printf("--(!)Error loading\n");
 }
 
 cv::Mat HaarHistogramHSVHandThresholder::thresholdHand ( cv::Mat input )
 {
   std::vector<Rect> faces;
-  Mat frame_gray, out;
+  Mat frame_gray, out, bw, bw2;
 
   out = input;
+      Mat inHSV;
+     cvtColor( input, inHSV, CV_BGR2HSV );
 
   cvtColor( input, frame_gray, CV_BGR2GRAY );
   equalizeHist( frame_gray, frame_gray );
 
   // Détection des visages
   face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(30, 30) );
-
 
   if ( faces.size() > 0 )
   {
@@ -76,7 +78,7 @@ cv::Mat HaarHistogramHSVHandThresholder::thresholdHand ( cv::Mat input )
         float binval = histHue.at<float>(i);
         if (binval == maxValue)
             {
-                cout << "Max Value is hue at index" << i << endl;
+                //cout << "Max Value is hue at index" << i << endl;
                 hue_skin_min_value = 8*i;
             }
     }
@@ -94,13 +96,11 @@ cv::Mat HaarHistogramHSVHandThresholder::thresholdHand ( cv::Mat input )
         float binval = histSat.at<float>(i);
         if (binval == maxValue)
             {
-                cout << "Max Value is sat at index" << i << endl;
+                //cout << "Max Value is sat at index" << i << endl;
                 sat_skin_min_value = 6*i;
             }
     }
 
-    Mat inHSV;
-     cvtColor( input, inHSV, CV_BGR2HSV );
 
     int min_hue,max_hue,min_sat,max_sat;
 
@@ -126,18 +126,24 @@ cv::Mat HaarHistogramHSVHandThresholder::thresholdHand ( cv::Mat input )
         max_sat = sat_skin_min_value+30;
 
     Mat bw;
-    inRange(inHSV,Scalar(min_hue,50,0),Scalar(max_hue,190,255),bw);
 
+    minHSV = Scalar(min_hue,50,0);
+    maxHSV = Scalar(max_hue,190,255);
 
-    // Rectangle
     Point center ( faces[i].x + faces[i].width / 2.0, faces[i].y + faces[i].height / 2.0);
-    circle( out, center, faces[i].width / 1.6, Scalar( 0, 0, 0), -1, 8 );
+    circle( inHSV, center, faces[i].width / 1.4, Scalar( 0, 0, 0), -1, 8 );
   }
 
-   if (isDebug())
-        imshow("HaarHistogramHSVHandThresholder", out);
+   inRange(inHSV, minHSV, maxHSV, bw);
 
-  return out;
+    Mat element = getStructuringElement( morph_elem, Size( 2*morph_size + 1, 2*morph_size+1 ), Point( morph_size, morph_size ) );
+    morphologyEx( bw, bw2, MORPH_CLOSE, element );
+    bw = bw2;
+
+      if (isDebug())
+        imshow("HaarHistogramHSVHandThresholder", bw);
+
+  return bw;
 }
 
 HaarHistogramHSVHandThresholder::~HaarHistogramHSVHandThresholder()

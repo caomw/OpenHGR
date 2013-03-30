@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1364684702 source:/home/mathieu/Desktop/OpenHGR/Recognition/main.cpp
+1364685552 source:/home/mathieu/Desktop/OpenHGR/Recognition/main.cpp
 	<iostream>
 	<stdio.h>
 	<unistd.h>
@@ -134,10 +134,11 @@
 
 1364536348 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/AbstractHandThresholder.cpp
 
-1364529766 /home/mathieu/Desktop/OpenHGR/Recognition/include/HaarHistogramHSVHandThresholder.h
+1364686102 /home/mathieu/Desktop/OpenHGR/Recognition/include/HaarHistogramHSVHandThresholder.h
 	<AbstractHandThresholder.h>
+	"opencv2/imgproc/imgproc.hpp"
 
-1364535088 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HaarHistogramHSVHandThresholder.cpp
+1364686191 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HaarHistogramHSVHandThresholder.cpp
 	"HaarHistogramHSVHandThresholder.h"
 	<iostream>
 	<stdio.h>

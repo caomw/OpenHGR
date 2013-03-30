@@ -3,6 +3,7 @@
 
 #include <AbstractHandThresholder.h>
 
+#include "opencv2/imgproc/imgproc.hpp"
 
 class HaarHistogramHSVHandThresholder : public AbstractHandThresholder
 {
@@ -16,6 +17,14 @@ class HaarHistogramHSVHandThresholder : public AbstractHandThresholder
         cv::CascadeClassifier face_cascade;
         int hue_skin_min_value;
         int sat_skin_min_value;
+
+        // Morphology parameters
+        int morph_elem = cv::MORPH_ELLIPSE;
+        int morph_size = 6;
+
+        // HSV threshold
+        cv::Scalar minHSV = cv::Scalar(0,  50, 0);
+        cv::Scalar maxHSV = cv::Scalar(20, 190, 255);
 };
 
 #endif // HAARHISTOGRAMHSVTHANDHRESHOLDER_H

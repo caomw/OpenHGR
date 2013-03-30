@@ -28,7 +28,7 @@ int main()
     GestureRecognizerFactory grf;
 
     // Filters
-    AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_HSV);
+    AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_HISTOGRAM_HSV);
     AbstractHandDetector* handDetector = hdf.createInstance(CONTOUR_COMPARISON);
     AbstractGestureRecognizer* gestureRecognizer = grf.createInstance(SIFT);
 
