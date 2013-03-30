@@ -17,21 +17,21 @@ int main()
 {
     //Things to read files
     //char* directoryName = "../data/Resized/Index";
-    char* directoryName = "/home/frederick/Code/OpenHGR/data/Resized/Paume";
-    char* directoryNameIndex = "/home/frederick/Code/OpenHGR/data/Resized/Index";
+    char* directoryName = "/home/frederick/Code/OpenHGR/data/Cropped/Paume";
+    char* directoryNameIndex = "/home/frederick/Code/OpenHGR/data/Cropped/Index";
     unsigned char isFile =0x8;
     DIR *directory;
     struct dirent *file;
 
 
     //Real Stuff
-    Ptr<FeatureDetector> features = FeatureDetector::create("SIFT");
-    Ptr<DescriptorExtractor> descriptor = DescriptorExtractor::create("SIFT");
+    Ptr<FeatureDetector> features = FeatureDetector::create("SURF");
+    Ptr<DescriptorExtractor> descriptor = DescriptorExtractor::create("SURF");
     Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create("FlannBased");
 
     //defining terms for bowkmeans trainer
     TermCriteria tc(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 10, 0.001);
-    int dictionarySize = 100;
+    int dictionarySize = 750;
     int retries = 1;
     int flags = KMEANS_PP_CENTERS;
     BOWKMeansTrainer bowTrainer(dictionarySize, tc, retries, flags);
@@ -222,11 +222,12 @@ int main()
 
     Mat tryme(0, dictionarySize, CV_32FC1);
     Mat tryDescriptor;
-    Mat img3 = imread("/home/frederick/Code/OpenHGR/data/Resized/Index/Index-1.1_50.pgm", 0);
+    Mat img3 = imread("/home/frederick/Code/OpenHGR/data/BenchmarkPhotoCropped/Test-Paume-1.3.pgm", 0);
     vector<KeyPoint> keypoints3;
     features->detect(img3, keypoints3);
     bowDE.compute(img3, keypoints3, tryDescriptor);
     tryme.push_back(tryDescriptor);
+
 
     cout<<SVM.predict(tryme)<<endl;
 

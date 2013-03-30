@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
+	<File name="include/AbstractFilter.h" open="0" top="0" tabpos="6">
+		<Cursor position="185" topLine="0" />
+	</File>
 	<File name="include/AbstractHandDetector.h" open="0" top="0" tabpos="0">
 		<Cursor position="205" topLine="0" />
 	</File>
@@ -10,28 +13,31 @@
 	<File name="include/ContourComparisonHandDetector.h" open="0" top="0" tabpos="0">
 		<Cursor position="256" topLine="0" />
 	</File>
-	<File name="include/HaarHSVHandThresholder.h" open="0" top="0" tabpos="0">
-		<Cursor position="363" topLine="1" />
+	<File name="include/HaarHSVHandThresholder.h" open="0" top="0" tabpos="7">
+		<Cursor position="664" topLine="0" />
 	</File>
 	<File name="include/HaarHistogramHSVHandThresholder.h" open="0" top="0" tabpos="0">
 		<Cursor position="409" topLine="0" />
 	</File>
-	<File name="include/HandThresholderFactory.h" open="0" top="0" tabpos="4">
+	<File name="include/HandThresholderFactory.h" open="0" top="0" tabpos="5">
 		<Cursor position="376" topLine="0" />
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="1707" topLine="57" />
+	<File name="main.cpp" open="1" top="1" tabpos="0">
+		<Cursor position="185" topLine="0" />
 	</File>
-	<File name="src/ContourComparisonHandDetector.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="843" topLine="17" />
+	<File name="src/AbstractFilter.cpp" open="0" top="0" tabpos="8">
+		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src/HaarHSVHandThresholder.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="753" topLine="13" />
+	<File name="src/ContourComparisonHandDetector.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="516" topLine="0" />
 	</File>
-	<File name="src/HaarHistogramHSVHandThresholder.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="206" topLine="0" />
+	<File name="src/HaarHSVHandThresholder.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="1205" topLine="0" />
 	</File>
-	<File name="src/HandThresholderFactory.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="188" topLine="6" />
+	<File name="src/HaarHistogramHSVHandThresholder.cpp" open="0" top="0" tabpos="9">
+		<Cursor position="631" topLine="88" />
+	</File>
+	<File name="src/HandThresholderFactory.cpp" open="0" top="0" tabpos="10">
+		<Cursor position="188" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

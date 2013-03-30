@@ -181,3 +181,83 @@
 1364589571 /home/mathieu/Desktop/OpenHGR/Recognition/include/HandDetectorFactory.h
 	<AbstractHandDetector.h>
 
+1364598355 source:/home/frederick/Code/OpenHGR/Recognition/main.cpp
+	<iostream>
+	<stdio.h>
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+	<AbstractHandThresholder.h>
+	<AbstractHandDetector.h>
+	<HandThresholderFactory.h>
+	<HandDetectorFactory.h>
+
+1364580231 /home/frederick/Code/OpenHGR/Recognition/include/AbstractHandThresholder.h
+	<AbstractFilter.h>
+	"opencv2/objdetect/objdetect.hpp"
+
+1364580231 /home/frederick/Code/OpenHGR/Recognition/include/AbstractFilter.h
+
+1364580231 /home/frederick/Code/OpenHGR/Recognition/include/AbstractHandDetector.h
+	<AbstractFilter.h>
+	"opencv2/objdetect/objdetect.hpp"
+
+1364580231 /home/frederick/Code/OpenHGR/Recognition/include/HandThresholderFactory.h
+	<AbstractHandThresholder.h>
+
+1364598355 /home/frederick/Code/OpenHGR/Recognition/include/HandDetectorFactory.h
+	<AbstractHandDetector.h>
+
+1364580231 source:/home/frederick/Code/OpenHGR/Recognition/src/AbstractFilter.cpp
+	"AbstractFilter.h"
+
+1364598355 source:/home/frederick/Code/OpenHGR/Recognition/src/ContourComparisonHandDetector.cpp
+	"ContourComparisonHandDetector.h"
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+
+1364580231 /home/frederick/Code/OpenHGR/Recognition/include/ContourComparisonHandDetector.h
+	<AbstractHandDetector.h>
+
+1364598355 source:/home/frederick/Code/OpenHGR/Recognition/src/HaarHSVHandThresholder.cpp
+	"HaarHSVHandThresholder.h"
+	<iostream>
+	<stdio.h>
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+
+1364598355 /home/frederick/Code/OpenHGR/Recognition/include/HaarHSVHandThresholder.h
+	<AbstractHandThresholder.h>
+	<iostream>
+	<stdio.h>
+
+1364580231 source:/home/frederick/Code/OpenHGR/Recognition/src/HaarHistogramHSVHandThresholder.cpp
+	"HaarHistogramHSVHandThresholder.h"
+	<iostream>
+	<stdio.h>
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+
+1364580231 /home/frederick/Code/OpenHGR/Recognition/include/HaarHistogramHSVHandThresholder.h
+	<AbstractHandThresholder.h>
+
+1364598355 source:/home/frederick/Code/OpenHGR/Recognition/src/HandThresholderFactory.cpp
+	<HandThresholderFactory.h>
+	<HaarHSVHandThresholder.h>
+	<HaarHistogramHSVHandThresholder.h>
+
+1364580231 /home/frederick/Code/OpenHGR/Recognition/src/AbstractFilter.h
+
+1364580231 /home/frederick/Code/OpenHGR/Recognition/src/ContourComparisonHandDetector.h
+	<AbstractHandDetector.h>
+
+1364598355 /home/frederick/Code/OpenHGR/Recognition/src/HaarHSVHandThresholder.h
+	<AbstractHandThresholder.h>
+	<iostream>
+	<stdio.h>
+
+1364580231 /home/frederick/Code/OpenHGR/Recognition/src/HaarHistogramHSVHandThresholder.h
+	<AbstractHandThresholder.h>
+
