@@ -40,20 +40,25 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/AbstractFilter.h" />
+		<Unit filename="include/AbstractGestureRecognizer.h" />
 		<Unit filename="include/AbstractHandDetector.h" />
 		<Unit filename="include/AbstractHandThresholder.h" />
 		<Unit filename="include/ContourComparisonHandDetector.h" />
+		<Unit filename="include/GestureRecognizerFactory.h" />
 		<Unit filename="include/HaarHSVHandThresholder.h" />
 		<Unit filename="include/HaarHistogramHSVHandThresholder.h" />
 		<Unit filename="include/HandDetectorFactory.h" />
 		<Unit filename="include/HandThresholderFactory.h" />
+		<Unit filename="include/SIFTGestureRecognizer.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/AbstractFilter.cpp" />
 		<Unit filename="src/ContourComparisonHandDetector.cpp" />
+		<Unit filename="src/GestureRecognizerFactory.cpp" />
 		<Unit filename="src/HaarHSVHandThresholder.cpp" />
 		<Unit filename="src/HaarHistogramHSVHandThresholder.cpp" />
 		<Unit filename="src/HandDetectorFactory.cpp" />
 		<Unit filename="src/HandThresholderFactory.cpp" />
+		<Unit filename="src/SIFTGestureRecognizer.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

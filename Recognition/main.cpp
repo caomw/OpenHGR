@@ -64,7 +64,7 @@ int main()
                 Rect handRect = handDetector->detectHand(thresholdFrame);
                 string gesture = gestureRecognizer->recognizeGesture(frame, handRect);
 
-                cout << gesture << endl;
+                //cout << gesture << endl;
 
                 rectangle(frame, Point(handRect.x, handRect.y), Point(handRect.x+handRect.width, handRect.y+handRect.height), Scalar(0,0,255), 2, 8 );
                 imshow("Main", frame);
