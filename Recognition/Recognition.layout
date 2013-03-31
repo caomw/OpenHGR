@@ -22,7 +22,7 @@
 	<File name="include/HaarHSVHandThresholder.h" open="0" top="0" tabpos="0">
 		<Cursor position="149" topLine="3" />
 	</File>
-	<File name="include/HaarHistogramHSVHandThresholder.h" open="1" top="0" tabpos="3">
+	<File name="include/HaarHistogramHSVHandThresholder.h" open="0" top="0" tabpos="3">
 		<Cursor position="30" topLine="0" />
 	</File>
 	<File name="include/HandDetectorFactory.h" open="0" top="0" tabpos="0">
@@ -35,19 +35,19 @@
 		<Cursor position="66" topLine="0" />
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="1129" topLine="15" />
+		<Cursor position="1827" topLine="48" />
 	</File>
-	<File name="src/ContourComparisonHandDetector.cpp" open="1" top="0" tabpos="4">
+	<File name="src/ContourComparisonHandDetector.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="663" topLine="26" />
 	</File>
 	<File name="src/GestureRecognizerFactory.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="316" topLine="0" />
 	</File>
 	<File name="src/HaarHSVHandThresholder.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="885" topLine="11" />
+		<Cursor position="885" topLine="17" />
 	</File>
 	<File name="src/HaarHistogramHSVHandThresholder.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="343" topLine="122" />
+		<Cursor position="1671" topLine="41" />
 	</File>
 	<File name="src/HandDetectorFactory.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="33" topLine="0" />
