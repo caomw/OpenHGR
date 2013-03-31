@@ -17,9 +17,9 @@ int main()
 {
     //Things to read files
     //char* directoryName = "../data/Resized/Index";
-    char* directoryName = "/home/frederick/Code/OpenHGR/data/Fred/Paume/Resized";
-    char* directoryNameIndex = "/home/frederick/Code/OpenHGR/data/Fred/Index/Resized";
-    char* directoryNameTest = "/home/frederick/Code/OpenHGR/data/Fred/Index/Test/Resized";
+    char* directoryName = "/home/frederick/Code/OpenHGR/data/Fred/Paume/Cropped";
+    char* directoryNameIndex = "/home/frederick/Code/OpenHGR/data/Fred/Index/Cropped";
+    char* directoryNameTest = "/home/frederick/Code/OpenHGR/data/Cropped/Paume";
     String names[2] = {"Paume","Index"};
     int expected = 1;
     int correct = 0;
@@ -70,6 +70,7 @@ int main()
     directory = opendir(directoryName);
 
 
+
     while (file = readdir(directory))
     {
         if ( file->d_type == isFile)
@@ -101,8 +102,7 @@ int main()
                 cptr++;
 
 
-                float label = 1.0;
-                labels.push_back(label);
+
                 bowTrainer.add(features1);
             }
         }
@@ -140,8 +140,7 @@ int main()
                 cptr++;
 
 
-                float label = 2.0;
-                labels.push_back(label);
+
                 bowTrainer.add(features2);
             }
         }
@@ -187,6 +186,9 @@ int main()
 
                 bowDE.compute(img, keypoints, bowDescriptor);
                 trainme.push_back(bowDescriptor);
+
+                 float label = 1.0;
+                labels.push_back(label);
                 //cout << "." << endl;
             }
         }
@@ -222,6 +224,9 @@ int main()
                 descriptor->compute(img, keypoints2, features2);
                 bowDE.compute(img, keypoints2, bowDescriptor2);
                 trainme.push_back(bowDescriptor2);
+
+                float label = 2.0;
+                labels.push_back(label);
                 //cout << "." << endl;
             }
         }
@@ -275,6 +280,44 @@ int main()
                 correct++;
         }
     }
+
+    /*CvCapture* capture;
+    capture = cvCaptureFromFile("../data/Benchmark-Fred.avi");
+    Mat f, frame;
+
+     if ( capture )
+    {
+        while( true )
+        {
+            f = cvQueryFrame( capture );
+            flip(f,frame,1);
+
+              if( !frame.empty() )
+            {
+                Mat tryme(0, dictionarySize, CV_32FC1);
+                Mat tryDescriptor;
+                vector<KeyPoint> keypoints3;
+
+
+                features->detect(frame, keypoints3);
+                bowDE.compute(frame, keypoints3, tryDescriptor);
+                tryme.push_back(tryDescriptor);
+
+                int guess = (int)SVM.predict(tryme)-1;
+
+                cout<<names[guess]<<endl;
+                imshow("Main", frame);
+            }
+            else
+            {
+                 break;
+            }
+
+            int c = waitKey(10);
+            if( (char)c == 'c' ) { break; }
+
+        }
+    }*/
 
 
 
