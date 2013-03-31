@@ -31,7 +31,8 @@ cv::Mat HaarHistogramHSVHandThresholder::thresholdHand ( cv::Mat input )
         Mat face = input(faceRect);
         Mat faceHSV, histHue, histSat;
         MatND histogram;
-        int h_bins = 32, s_bins = 30;
+        //int h_bins = 32, s_bins = 30;
+        int h_bins = 30, s_bins = 32;
         int min_hue,max_hue,min_sat,max_sat;
         int channels[] = { 0, 1 };
         int histSize[] = { h_bins, s_bins };
@@ -48,6 +49,30 @@ cv::Mat HaarHistogramHSVHandThresholder::thresholdHand ( cv::Mat input )
         cvtColor( face, faceHSV, CV_BGR2HSV );
 
         calcHist( &faceHSV, 1, channels, Mat(), histogram, 2, histSize, ranges, true, false );
+
+///////////////////////////////////////////////////////////////
+
+        double maxVal = 0;
+        Point maxLoc;
+        minMaxLoc(histogram, 0, &maxVal, 0, &maxLoc);
+        cout << maxLoc.x << ":" << maxLoc.y << ":" << endl;
+
+        int scale = 10;
+        Mat histImg = Mat::zeros(s_bins*scale, h_bins*10, CV_8UC3);
+
+    for( int h = 0; h < h_bins; h++ )
+        for( int s = 0; s < s_bins; s++ )
+        {
+            float binVal = histogram.at<float>(h, s);
+            int intensity = cvRound(binVal*255/maxVal);
+            rectangle( histImg, Point(h*scale, s*scale),
+                        Point( (h+1)*scale - 1, (s+1)*scale - 1),
+                        Scalar::all(intensity),
+                        CV_FILLED );
+        }
+
+        imshow("abc", histImg);
+////////////////////////////////////////////////////////////////
         split(faceHSV,splitHSV);
         calcHist(&splitHSV[0],1,0,Mat(),histHue,1,histHueSize,hh_ranges,true,false);
         minMaxLoc(histHue,0,&maxValue,0,0);

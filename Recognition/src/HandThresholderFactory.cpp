@@ -1,6 +1,9 @@
 #include <HandThresholderFactory.h>
 #include <HaarHSVHandThresholder.h>
 #include <HaarHistogramHSVHandThresholder.h>
+#include <HaarYCbCrHandThresholder.h>
+#include <HaarYCbCrEllipseHandThresholder.h>
+#include <HaarAdaptiveHandThresholder.h>
 
 HandThresholderFactory::HandThresholderFactory()
 {
@@ -18,6 +21,12 @@ AbstractHandThresholder* HandThresholderFactory::createInstance ( HandThresholde
     {
         case HAAR_HISTOGRAM_HSV:
             return new HaarHistogramHSVHandThresholder();
+        case HAAR_YCBCR:
+            return new HaarYCbCrHandThresholder();
+        case HAAR_YCBCR_ELLIPSE:
+            return new HaarYCbCrEllipseHandThresholder();
+        case HAAR_ADAPTIVE:
+            return new HaarAdaptiveHandThresholder();
         case HAAR_HSV:
         default: return new HaarHSVHandThresholder ();
     }

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1364706386 source:/home/mathieu/Desktop/OpenHGR/Recognition/main.cpp
+1364759979 source:/home/mathieu/Desktop/OpenHGR/Recognition/main.cpp
 	<iostream>
 	<stdio.h>
 	<unistd.h>
@@ -138,7 +138,7 @@
 	<AbstractHandThresholder.h>
 	"opencv2/imgproc/imgproc.hpp"
 
-1364706314 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HaarHistogramHSVHandThresholder.cpp
+1364750405 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HaarHistogramHSVHandThresholder.cpp
 	"HaarHistogramHSVHandThresholder.h"
 	<iostream>
 	<stdio.h>
@@ -146,12 +146,15 @@
 	"opencv2/highgui/highgui.hpp"
 	"opencv2/imgproc/imgproc.hpp"
 
-1364589359 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HandThresholderFactory.cpp
+1364759218 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HandThresholderFactory.cpp
 	<HandThresholderFactory.h>
 	<HaarHSVHandThresholder.h>
 	<HaarHistogramHSVHandThresholder.h>
+	<HaarYCbCrHandThresholder.h>
+	<HaarYCbCrEllipseHandThresholder.h>
+	<HaarAdaptiveHandThresholder.h>
 
-1364589259 /home/mathieu/Desktop/OpenHGR/Recognition/include/HandThresholderFactory.h
+1364759196 /home/mathieu/Desktop/OpenHGR/Recognition/include/HandThresholderFactory.h
 	<AbstractHandThresholder.h>
 
 1364533711 /home/mathieu/Desktop/OpenHGR/Recognition/include/AbstractFactory.h
@@ -289,4 +292,84 @@
 
 1364680395 /home/mathieu/Desktop/OpenHGR/Recognition/include/GestureRecognizerFactory.h
 	<AbstractGestureRecognizer.h>
+
+1364757962 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HaarYCbCrHandThresholder.cpp
+	"HaarYCbCrHandThresholder.h"
+	<iostream>
+	<stdio.h>
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+
+1364757268 /home/mathieu/Desktop/OpenHGR/Recognition/include/HaarYCbCrHandThresholder.h
+	<AbstractHandThresholder.h>
+	"opencv2/imgproc/imgproc.hpp"
+
+1364757429 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HaarYCbCrEllipseHandThresholder.cpp
+	"HaarYCbCrEllipseHandThresholder.h"
+	<iostream>
+	<stdio.h>
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+
+1364757823 /home/mathieu/Desktop/OpenHGR/Recognition/include/HaarYCbCrEllipseHandThresholder.h
+	<AbstractHandThresholder.h>
+	"opencv2/imgproc/imgproc.hpp"
+
+1364758981 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HaarAdaptativeHandThresholder.cpp
+	"HaarAdaptativeHandThresholder.h"
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+
+1364758918 /home/mathieu/Desktop/OpenHGR/Recognition/include/HaarAdaptativeHandThresholder.h
+	<AbstractHandThresholder.h>
+	"opencv2/imgproc/imgproc.hpp"
+
+1364759946 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HaarAdaptiveHandThresholder.cpp
+	"HaarAdaptiveHandThresholder.h"
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+	"opencv2/contrib/contrib.hpp"
+
+1364760534 /home/mathieu/Desktop/OpenHGR/Recognition/include/HaarAdaptiveHandThresholder.h
+	<AbstractHandThresholder.h>
+	"opencv2/imgproc/imgproc.hpp"
+
+1350687311 /usr/local/include/opencv2/contrib/contrib.hpp
+	"opencv2/core/core.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+	"opencv2/features2d/features2d.hpp"
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/contrib/retina.hpp"
+	"opencv2/contrib/openfabmap.hpp"
+
+1350687311 /usr/local/include/opencv2/features2d/features2d.hpp
+	"opencv2/core/core.hpp"
+	"opencv2/flann/miniflann.hpp"
+	<limits>
+
+1350514538 /usr/local/include/opencv2/flann/miniflann.hpp
+	"opencv2/core/core.hpp"
+	"opencv2/flann/defines.h"
+
+1348786506 /usr/local/include/opencv2/flann/defines.h
+	"config.h"
+
+1343256930 /usr/local/include/opencv2/flann/config.h
+
+1350514538 /usr/local/include/opencv2/contrib/retina.hpp
+	"opencv2/core/core.hpp"
+	<valarray>
+
+1347663308 /usr/local/include/opencv2/contrib/openfabmap.hpp
+	"opencv2/core/core.hpp"
+	"opencv2/features2d/features2d.hpp"
+	<vector>
+	<list>
+	<map>
+	<set>
+	<valarray>
 
