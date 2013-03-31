@@ -28,7 +28,7 @@ int main()
     GestureRecognizerFactory grf;
 
     // Filters
-    AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_ADAPTIVE);
+    AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_LUMA);
     AbstractHandDetector* handDetector = hdf.createInstance(CONTOUR_COMPARISON);
     AbstractGestureRecognizer* gestureRecognizer = grf.createInstance(SIFT);
 
@@ -37,11 +37,11 @@ int main()
     handDetector->setDebug(1);
     //gestureRecognizer->setDebug(1);
 
-    int video = 0;
+    int video = 1;
 
     if ( video )
     {
-        capture = cvCaptureFromFile("../data/benchmark1.avi");
+        capture = cvCaptureFromFile("../data/Benchmark-Fred.avi");
     }
     else
     {

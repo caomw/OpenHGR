@@ -4,6 +4,7 @@
 #include <HaarYCbCrHandThresholder.h>
 #include <HaarYCbCrEllipseHandThresholder.h>
 #include <HaarAdaptiveHandThresholder.h>
+#include <HaarLumaHandThresholder.h>
 
 HandThresholderFactory::HandThresholderFactory()
 {
@@ -27,6 +28,8 @@ AbstractHandThresholder* HandThresholderFactory::createInstance ( HandThresholde
             return new HaarYCbCrEllipseHandThresholder();
         case HAAR_ADAPTIVE:
             return new HaarAdaptiveHandThresholder();
+        case HAAR_LUMA:
+            return new HaarLumaHandThresholder();
         case HAAR_HSV:
         default: return new HaarHSVHandThresholder ();
     }

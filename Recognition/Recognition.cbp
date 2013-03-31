@@ -45,8 +45,12 @@
 		<Unit filename="include/AbstractHandThresholder.h" />
 		<Unit filename="include/ContourComparisonHandDetector.h" />
 		<Unit filename="include/GestureRecognizerFactory.h" />
+		<Unit filename="include/HaarAdaptiveHandThresholder.h" />
 		<Unit filename="include/HaarHSVHandThresholder.h" />
 		<Unit filename="include/HaarHistogramHSVHandThresholder.h" />
+		<Unit filename="include/HaarLumaHandThresholder.h" />
+		<Unit filename="include/HaarYCbCrEllipseHandThresholder.h" />
+		<Unit filename="include/HaarYCbCrHandThresholder.h" />
 		<Unit filename="include/HandDetectorFactory.h" />
 		<Unit filename="include/HandThresholderFactory.h" />
 		<Unit filename="include/SIFTGestureRecognizer.h" />
@@ -54,8 +58,12 @@
 		<Unit filename="src/AbstractFilter.cpp" />
 		<Unit filename="src/ContourComparisonHandDetector.cpp" />
 		<Unit filename="src/GestureRecognizerFactory.cpp" />
+		<Unit filename="src/HaarAdaptiveHandThresholder.cpp" />
 		<Unit filename="src/HaarHSVHandThresholder.cpp" />
 		<Unit filename="src/HaarHistogramHSVHandThresholder.cpp" />
+		<Unit filename="src/HaarLumaHandThresholde.cpp" />
+		<Unit filename="src/HaarYCbCrEllipseHandThresholder.cpp" />
+		<Unit filename="src/HaarYCbCrHandThresholder.cpp" />
 		<Unit filename="src/HandDetectorFactory.cpp" />
 		<Unit filename="src/HandThresholderFactory.cpp" />
 		<Unit filename="src/SIFTGestureRecognizer.cpp" />

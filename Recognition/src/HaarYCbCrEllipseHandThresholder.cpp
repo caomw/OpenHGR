@@ -41,6 +41,7 @@ cv::Mat HaarYCbCrEllipseHandThresholder::thresholdYCbCr ( cv::Mat input )
         for(int col = 0; col < input.cols; ++col)
         {
              Vec3b pt = ycbcr.at<Vec3b>(row,col);
+             if(pt[0] > 128)
              if ((skinCrCbHist.at<uchar>(pt[1], pt[2]) > 0))
                   output.at<uchar>(row,col) = 255;
         }

@@ -3,7 +3,7 @@
 
 #include <AbstractHandThresholder.h>
 
-enum HandThresholderType { HAAR_HSV, HAAR_HISTOGRAM_HSV, HAAR_YCBCR, HAAR_YCBCR_ELLIPSE, HAAR_ADAPTIVE };
+enum HandThresholderType { HAAR_HSV, HAAR_HISTOGRAM_HSV, HAAR_YCBCR, HAAR_YCBCR_ELLIPSE, HAAR_ADAPTIVE, HAAR_LUMA };
 
 class HandThresholderFactory
 {
