@@ -17,11 +17,20 @@ int main()
 {
     //Things to read files
     //char* directoryName = "../data/Resized/Index";
-    char* directoryName = "/home/frederick/Code/OpenHGR/data/Cropped/Paume";
-    char* directoryNameIndex = "/home/frederick/Code/OpenHGR/data/Cropped/Index";
+    char* directoryName = "/home/frederick/Code/OpenHGR/data/Fred/Paume/Resized";
+    char* directoryNameIndex = "/home/frederick/Code/OpenHGR/data/Fred/Index/Resized";
+    char* directoryNameTest = "/home/frederick/Code/OpenHGR/data/Fred/Index/Test/Resized";
+    String names[2] = {"Paume","Index"};
+    int expected = 1;
+    int correct = 0;
+    int tried = 0;
+
+
     unsigned char isFile =0x8;
     DIR *directory;
     struct dirent *file;
+    long nbKeypoints = 0;
+    long cptr = 0;
 
 
     //Real Stuff
@@ -30,9 +39,9 @@ int main()
     Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create("FlannBased");
 
     //defining terms for bowkmeans trainer
-    TermCriteria tc(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 10, 0.001);
-    int dictionarySize = 750;
-    int retries = 1;
+    TermCriteria tc(CV_TERMCRIT_ITER|CV_TERMCRIT_EPS, 100, 0.001);
+    int dictionarySize = 15;
+    int retries = 20;
     int flags = KMEANS_PP_CENTERS;
     BOWKMeansTrainer bowTrainer(dictionarySize, tc, retries, flags);
 
@@ -54,7 +63,7 @@ int main()
 
 
 
-    SiftFeatureDetector detector;
+    SurfFeatureDetector detector;
 
 
     //On construit le dictionnaire
@@ -68,7 +77,6 @@ int main()
             string filepath = directoryName;
             filepath += "/";
             filepath += file->d_name;
-            cout <<"Found a File : " << file->d_name << endl;
             cout << "File is at " << filepath << endl;
 
             Mat img = imread(filepath,CV_LOAD_IMAGE_GRAYSCALE);
@@ -87,10 +95,15 @@ int main()
 
                 descriptor->compute(img, keypoints, features1);
 
+                cout << "Detected features :" << features1.size() << endl;
+                cout << "Detected features height :" << features1.size().height << endl;
+                nbKeypoints = features1.size().height;
+                cptr++;
+
+
                 float label = 1.0;
                 labels.push_back(label);
                 bowTrainer.add(features1);
-                cout << "." << endl;
             }
         }
     }
@@ -104,7 +117,6 @@ int main()
             string filepath = directoryNameIndex;
             filepath += "/";
             filepath += file->d_name;
-            cout <<"Found a File : " << file->d_name << endl;
             cout << "File is at " << filepath << endl;
 
             Mat img = imread(filepath,CV_LOAD_IMAGE_GRAYSCALE);
@@ -119,15 +131,18 @@ int main()
 
             if (keypoints2.size() > 0)
             {
-                cout << "Detected keypoints :" << keypoints.size() << endl;
+                cout << "Detected keypoints :" << keypoints2.size() << endl;
 
                 descriptor->compute(img, keypoints2, features2);
-                bowDE.compute(img, keypoints2, bowDescriptor2);
-                trainme.push_back(bowDescriptor2);
+                cout << "Detected features :" << features2.size() << endl;
+                cout << "Detected features height :" << features2.size().height << endl;
+                nbKeypoints += features2.size().height;
+                cptr++;
+
+
                 float label = 2.0;
                 labels.push_back(label);
-                bowTrainer.add(features1);
-                cout << "." << endl;
+                bowTrainer.add(features2);
             }
         }
     }
@@ -149,8 +164,8 @@ int main()
             string filepath = directoryName;
             filepath += "/";
             filepath += file->d_name;
-            cout <<"Found a File : " << file->d_name << endl;
-            cout << "File is at " << filepath << endl;
+            //cout <<"Found a File : " << file->d_name << endl;
+            //cout << "File is at " << filepath << endl;
 
             Mat img = imread(filepath,CV_LOAD_IMAGE_GRAYSCALE);
             if (!img.data)
@@ -164,7 +179,7 @@ int main()
 
             if (keypoints.size() > 0)
             {
-                cout << "Detected keypoints :" << keypoints.size() << endl;
+                //cout << "Detected keypoints :" << keypoints.size() << endl;
 
                 descriptor->compute(img, keypoints, features1);
 
@@ -172,7 +187,7 @@ int main()
 
                 bowDE.compute(img, keypoints, bowDescriptor);
                 trainme.push_back(bowDescriptor);
-                cout << "." << endl;
+                //cout << "." << endl;
             }
         }
     }
@@ -187,13 +202,13 @@ int main()
             string filepath = directoryNameIndex;
             filepath += "/";
             filepath += file->d_name;
-            cout <<"Found a File : " << file->d_name << endl;
-            cout << "File is at " << filepath << endl;
+            //cout <<"Found a File : " << file->d_name << endl;
+            //cout << "File is at " << filepath << endl;
 
             Mat img = imread(filepath,CV_LOAD_IMAGE_GRAYSCALE);
             if (!img.data)
             {
-                cout <<"Can't open file." << filepath << endl;
+                //cout <<"Can't open file." << filepath << endl;
                 continue;
             }
 
@@ -202,17 +217,17 @@ int main()
 
             if (keypoints2.size() > 0)
             {
-                cout << "Detected keypoints :" << keypoints.size() << endl;
+                //cout << "Detected keypoints :" << keypoints2.size() << endl;
 
                 descriptor->compute(img, keypoints2, features2);
                 bowDE.compute(img, keypoints2, bowDescriptor2);
                 trainme.push_back(bowDescriptor2);
-                cout << "." << endl;
+                //cout << "." << endl;
             }
         }
     }
 
-    cout << "Made it ! " << endl;
+    //cout << "Made it ! " << endl;
 
     //Mat dictionary = bowTrainer.cluster();
     //bowDE.setVocabulary(dictionary);
@@ -220,120 +235,52 @@ int main()
     CvSVM SVM;
     SVM.train(trainme,labels);
 
-    Mat tryme(0, dictionarySize, CV_32FC1);
-    Mat tryDescriptor;
-    Mat img3 = imread("/home/frederick/Code/OpenHGR/data/BenchmarkPhotoCropped/Test-Paume-1.3.pgm", 0);
-    vector<KeyPoint> keypoints3;
-    features->detect(img3, keypoints3);
-    bowDE.compute(img3, keypoints3, tryDescriptor);
-    tryme.push_back(tryDescriptor);
 
 
-    cout<<SVM.predict(tryme)<<endl;
-
-    /*Mat dictionary = bowTrainer.cluster();
-    bowDE.setVocabulary(dictionary);
-
-    CvSVM SVM;
-    SVM.train(trainme,labels);
-
-    Mat tryme(0, dictionarySize, CV_32FC1);
-    Mat tryDescriptor;
-    Mat img3 = imread("c:\\Users\\Elvan\\Desktop\\frame_0118.jpg", 0);
-    vector<KeyPoint> keypoints3;
-    features->detect(img3, keypoints3);
-    bowDE.compute(img3, keypoints3, tryDescriptor);
-    tryme.push_back(tryDescriptor);
-
-    cout<<SVM.predict(tryme)<<endl;*/
+    directory = opendir(directoryNameTest);
 
 
-
-    /*Ptr<FeatureDetector> features = FeatureDetector::create("SIFT");
-    Ptr<DescriptorExtractor> descriptor = DescriptorExtractor::create("SIFT");
-    Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create("FlannBased");
-
-    //defining terms for bowkmeans trainer
-    TermCriteria tc(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 10, 0.001);
-    int dictionarySize = 100;
-    int retries = 1;
-    int flags = KMEANS_PP_CENTERS;
-    BOWKMeansTrainer bowTrainer(dictionarySize, tc, retries, flags);
-
-    CvSVMParams params;
-    params.svm_type    = CvSVM::C_SVC;
-    params.kernel_type = CvSVM::LINEAR;
-    params.term_crit   = cvTermCriteria(CV_TERMCRIT_ITER, 100, 1e-6);
-
-    BOWImgDescriptorExtractor bowDE(descriptor, matcher);
-
-    Mat features1, features2;
-    Mat bowDescriptor, bowDescriptor2;
-
-    Mat trainme(0, dictionarySize, CV_32FC1);
-    Mat labels(0, 1, CV_32FC1);
-
-    while (dirp = readdir( dp ))
+    while (file = readdir(directory))
     {
+        if ( file->d_type == isFile)
+        {
+            string filepath = directoryNameTest;
+            filepath += "/";
+            filepath += file->d_name;
+            cout <<"Found a File : " << file->d_name << endl;
+            //cout << "File is at " << filepath << endl;
 
-        filepath = dir + "/" + dirp->d_name;
-        // If the file is a directory (or is in some way invalid) we'll skip it
-        if (stat( filepath.c_str(), &filestat )) continue;
-        if (S_ISDIR( filestat.st_mode ))         continue;
+            Mat img3 = imread(filepath,CV_LOAD_IMAGE_GRAYSCALE);
+            Mat tryme(0, dictionarySize, CV_32FC1);
+            Mat tryDescriptor;
+            if (!img3.data)
+            {
+                //cout <<"Can't open file." << filepath << endl;
+                continue;
+            }
 
-        Mat img = imread(filepath);
-        if (!img.data) {
-            cout <<"Can't open file." << endl;
-            continue;
+
+            vector<KeyPoint> keypoints3;
+
+
+            features->detect(img3, keypoints3);
+            bowDE.compute(img3, keypoints3, tryDescriptor);
+            tryme.push_back(tryDescriptor);
+
+            int guess = (int)SVM.predict(tryme)-1;
+
+            cout<<names[guess]<<endl;
+            tried++;
+            if (guess == expected)
+                correct++;
         }
-        features->detect(img, keypoints);
-        descriptor->compute(img, keypoints, features1);
-        bowDE.compute(img, keypoints, bowDescriptor);
-        trainme.push_back(bowDescriptor);
-        float label = 1.0;
-        labels.push_back(label);
-        bowTrainer.add(features1);
-        cout << "." << endl;
-    }
-
-    while (dirp2 = readdir( dp2 ))
-    {
-        filepath2 = dir2 + "/" + dirp2->d_name;
-        // If the file is a directory (or is in some way invalid) we'll skip it
-        if (stat( filepath2.c_str(), &filestat2 )) continue;
-        if (S_ISDIR( filestat2.st_mode ))         continue;
-
-        Mat img2 = imread(filepath2);
-        if (!img2.data) {
-            cout <<"Can't open file." << endl;
-            continue;
-        }
-        features->detect(img2, keypoints2);
-        descriptor->compute(img2, keypoints2, features2);
-        bowDE.compute(img2, keypoints2, bowDescriptor2);
-        trainme.push_back(bowDescriptor2);
-        float label = 0.0;
-        labels.push_back(label);
-        bowTrainer.add(features2);
-        cout << "." << endl;
     }
 
 
 
+    cout << "Correct :" << correct << "/" << tried << endl;
+    cout << "Average features detected :" << nbKeypoints / cptr << endl;
+    cout << "Cptr :" << cptr << endl;
 
-Mat dictionary = bowTrainer.cluster();
-bowDE.setVocabulary(dictionary);
 
-CvSVM SVM;
-SVM.train(trainme,labels);
-
-Mat tryme(0, dictionarySize, CV_32FC1);
-Mat tryDescriptor;
-Mat img3 = imread("c:\\Users\\Elvan\\Desktop\\frame_0118.jpg", 0);
-vector<KeyPoint> keypoints3;
-features->detect(img3, keypoints3);
-bowDE.compute(img3, keypoints3, tryDescriptor);
-tryme.push_back(tryDescriptor);
-
-cout<<SVM.predict(tryme)<<endl;*/
 }
