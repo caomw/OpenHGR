@@ -61,7 +61,7 @@
 		<Unit filename="src/HaarAdaptiveHandThresholder.cpp" />
 		<Unit filename="src/HaarHSVHandThresholder.cpp" />
 		<Unit filename="src/HaarHistogramHSVHandThresholder.cpp" />
-		<Unit filename="src/HaarLumaHandThresholde.cpp" />
+		<Unit filename="src/HaarLumaHandThresholder.cpp" />
 		<Unit filename="src/HaarYCbCrEllipseHandThresholder.cpp" />
 		<Unit filename="src/HaarYCbCrHandThresholder.cpp" />
 		<Unit filename="src/HandDetectorFactory.cpp" />
