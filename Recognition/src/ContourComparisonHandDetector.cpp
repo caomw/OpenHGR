@@ -58,6 +58,19 @@ cv::Rect ContourComparisonHandDetector::detectHand ( cv::Mat input )
            drawContours( drawing, contours, i, color, 2, 8, hierarchy, 0, Point() );
         }
 
+        for ( int i = 0; i < contours.size(); i ++ )
+            for ( int j = 0; j < templates.size(); j ++ )
+            {
+                double match = matchShapes ( contours[i], templates[j], CV_CONTOURS_MATCH_I3, 0 );
+                if ( match < 2 && match > 0 )
+                {
+                    cout << "match : " << match << endl;
+                    Rect r = boundingRect(contours[i]);
+                    rectangle(drawing, Point(r.x, r.y), Point(r.x+r.width, r.y+r.height), Scalar(255), 2, 8 );
+                }
+            }
+
+
         rectangle(drawing, Point(handRect.x, handRect.y), Point(handRect.x+handRect.width, handRect.y+handRect.height), Scalar(0,0,255), 2, 8 );
 
         imshow("ContourComparisonHandDetector", drawing);

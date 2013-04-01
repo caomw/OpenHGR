@@ -37,7 +37,7 @@ int main()
     handDetector->setDebug(1);
     //gestureRecognizer->setDebug(1);
 
-    int video = 1;
+    int video = 0;
 
     if ( video )
     {
