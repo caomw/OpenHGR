@@ -19,6 +19,7 @@ using namespace cv;
 
 int main()
 {
+    char* benchmark_file = "../data/Benchmark-Fred.avi";
     CvCapture* capture;
     Mat frame, f, thresholdFrame;
 
@@ -37,18 +38,18 @@ int main()
     handDetector->setDebug(1);
     //gestureRecognizer->setDebug(1);
 
-    int video = 0;
+    int video = 1;
 
     if ( video )
     {
-        capture = cvCaptureFromFile("../data/Benchmark-Fred.avi");
+        capture = cvCaptureFromFile(benchmark_file);
     }
     else
     {
-        capture = cvCaptureFromCAM( -1 );
-        //capture = cvCreateCameraCapture(1);
-        //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_WIDTH, 640 );
-        //cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_HEIGHT, 480 );
+        //capture = cvCaptureFromCAM( -1 );
+        capture = cvCreateCameraCapture(0);
+        cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_WIDTH, 640 );
+        cvSetCaptureProperty( capture, CV_CAP_PROP_FRAME_HEIGHT, 480 );
     }
 
     if ( capture )
@@ -71,7 +72,14 @@ int main()
             }
             else
             {
-                printf(" --(!) No captured frame -- Break!"); break;
+                if ( video )
+                {
+                    capture = cvCaptureFromFile(benchmark_file);
+                }
+                else
+                {
+                    break;
+                }
             }
 
             int c = waitKey(10);
