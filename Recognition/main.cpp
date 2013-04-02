@@ -20,6 +20,7 @@ using namespace cv;
 int main()
 {
     char* benchmark_file = "../data/Benchmark-Fred.avi";
+    //char* benchmark_file = "../data/benchmark1.avi";
     CvCapture* capture;
     Mat frame, f, thresholdFrame;
 

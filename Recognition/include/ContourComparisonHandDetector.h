@@ -14,11 +14,13 @@ class ContourComparisonHandDetector : public AbstractHandDetector
     private:
         void loadTemplates ();
         void loadTemplate ( std::string file );
+        std::vector<cv::Point> cropContour ( std::vector<cv::Point> contour, cv::Rect rect );
 
         std::string templates_path = "../data/Templates";
         std::vector<std::vector<cv::Point> > templates;
 
-        double shapeMatchThreshold = 0.4;
+        double shapeMatchThreshold = 0.20;
+        double widthHeightRadio = 1.1;
 };
 
 #endif // CONTOURCOMPARISONHANDDETECTOR_H
