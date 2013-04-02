@@ -67,16 +67,16 @@ Rect ConvexHullComparisonHandDetector::detectHand ( Mat input )
 
              if (depth > 50)
              {
-                line(drawing,start,far,Scalar(0,255,0));
-                line(drawing,end,far,Scalar(0,255,0));
-                circle(drawing,far,3,Scalar(255,0,0));
-                circle(drawing,end,3,Scalar(0,0,255));
-                cptrDoigts++;
+                //line(drawing,start,far,Scalar(0,255,0));
+                //line(drawing,end,far,Scalar(0,255,0));
+                //circle(drawing,far,3,Scalar(255,0,0));
+                //circle(drawing,end,3,Scalar(0,0,255));
+                //cptrDoigts++;
              }
              else
              {
-                 line(drawing,start,far,Scalar(0,255,0));
-                 line(drawing,end,far,Scalar(0,255,0));
+                 //line(drawing,start,far,Scalar(0,255,0));
+                 //line(drawing,end,far,Scalar(0,255,0));
              }
 
          }
