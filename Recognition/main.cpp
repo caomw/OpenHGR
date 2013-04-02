@@ -31,7 +31,7 @@ int main()
 
     // Filters
     AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_LUMA);
-    AbstractHandDetector* handDetector = hdf.createInstance(CONTOUR_COMPARISON);
+    AbstractHandDetector* handDetector = hdf.createInstance(CONVEX_HULL);
     AbstractGestureRecognizer* gestureRecognizer = grf.createInstance(SIFT);
 
     // Debugging

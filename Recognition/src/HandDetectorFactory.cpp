@@ -2,6 +2,7 @@
 
 #include <AbstractHandDetector.h>
 #include <ContourComparisonHandDetector.h>
+#include <ConvexHullComparisonHandDetector.h>
 
 HandDetectorFactory::HandDetectorFactory()
 {
@@ -17,6 +18,8 @@ AbstractHandDetector* HandDetectorFactory::createInstance ( HandDetectorType typ
 {
     switch ( type )
     {
+        case CONVEX_HULL:
+            return new ConvexHullComparisonHandDetector();
         case CONTOUR_COMPARISON:
         default: return new ContourComparisonHandDetector ();
     }

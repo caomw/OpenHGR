@@ -30,20 +30,25 @@ Rect ConvexHullComparisonHandDetector::detectHand ( Mat input )
     Mat threshold_output;
     vector<vector<Point> > contours;
     vector<Vec4i> hierarchy;
+    Rect tmp(0,0,0,0);
+
+
+     int contourIndex = 0;
+     vector<Point> points;
+
+    //Convert to gray and little blur
+    //cvtColor(input,gray,CV_BGR2GRAY);
+    //blur(gray,gray,Size(3,3));
+
+    //Detected Edges using Threshold
+    threshold(input,threshold_output,thresh,255,THRESH_BINARY);
+
+    //Finding contours
+    findContours(threshold_output,contours,hierarchy,CV_RETR_TREE,CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
 
     vector<vector<int> > hullsI(contours.size());
      vector<vector<Point> > hullsP(contours.size());
      vector<vector<Vec4i> > defects(contours.size());
-
-    //Convert to gray and little blur
-    cvtColor(input,gray,CV_BGR2GRAY);
-    blur(gray,gray,Size(3,3));
-
-    //Detected Edges using Threshold
-    threshold(gray,threshold_output,thresh,255,THRESH_BINARY);
-
-    //Finding contours
-    findContours(threshold_output,contours,hierarchy,CV_RETR_TREE,CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
 
     for (uint i=0; i<contours.size();i++)
      {
@@ -51,11 +56,14 @@ Rect ConvexHullComparisonHandDetector::detectHand ( Mat input )
          convexHull(contours[i],hullsP[i],false,true);
          if (hullsI[i].size()>3)
             convexityDefects(contours[i],hullsI[i],defects[i]);
+
+        if (i != 0 && defects[i].size() > defects[contourIndex].size())
+            contourIndex = i;
      }
 
-     for (uint i=0; i< contours.size();i++)
-     {
-
+     //for (uint i=0; i< contours.size();i++)
+     //{
+int i = contourIndex;
          //http://docs.opencv.org/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html
          for (uint j=0; j < defects[i].size();j++)
          {
@@ -67,6 +75,8 @@ Rect ConvexHullComparisonHandDetector::detectHand ( Mat input )
 
              if (depth > 50)
              {
+
+                 points.push_back(far);
                 //line(drawing,start,far,Scalar(0,255,0));
                 //line(drawing,end,far,Scalar(0,255,0));
                 //circle(drawing,far,3,Scalar(255,0,0));
@@ -80,7 +90,23 @@ Rect ConvexHullComparisonHandDetector::detectHand ( Mat input )
              }
 
          }
-     }
+
+         if (points.size() > 0)
+         {
+             Point2f center;
+             float radius;
+             minEnclosingCircle(points,center,radius);
+             tmp = Rect(center.x-(radius/2),center.y+(radius/2),radius,radius);
+             return tmp;
+
+             //RotatedRect rect = minAreaRect(points);
+
+             //ellipse(drawing,rect,Scalar(0,255,255),3);
+             //circle(drawing,Point((int)center.x,(int)center.y),(int)radius,Scalar(0,255,0),3);
+         }
+         else
+            return tmp;
+     //}
 
 
 

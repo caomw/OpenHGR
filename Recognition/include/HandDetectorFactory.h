@@ -3,7 +3,7 @@
 
 #include <AbstractHandDetector.h>
 
-enum HandDetectorType { CONTOUR_COMPARISON };
+enum HandDetectorType { CONTOUR_COMPARISON, CONVEX_HULL };
 
 class HandDetectorFactory
 {

@@ -184,12 +184,13 @@
 	<AbstractHandThresholder.h>
 	"opencv2/imgproc/imgproc.hpp"
 
-1364598355 source:/home/frederick/Code/OpenHGR/Recognition/src/HandDetectorFactory.cpp
+1364869409 source:/home/frederick/Code/OpenHGR/Recognition/src/HandDetectorFactory.cpp
 	<HandDetectorFactory.h>
 	<AbstractHandDetector.h>
 	<ContourComparisonHandDetector.h>
+	<ConvexHullComparisonHandDetector.h>
 
-1364598355 /home/frederick/Code/OpenHGR/Recognition/include/HandDetectorFactory.h
+1364869331 /home/frederick/Code/OpenHGR/Recognition/include/HandDetectorFactory.h
 	<AbstractHandDetector.h>
 
 1364580231 /home/frederick/Code/OpenHGR/Recognition/include/AbstractHandDetector.h
@@ -222,7 +223,7 @@
 	"opencv2/highgui/highgui.hpp"
 	"opencv2/imgproc/imgproc.hpp"
 
-1364867286 source:/home/frederick/Code/OpenHGR/Recognition/main.cpp
+1364869386 source:/home/frederick/Code/OpenHGR/Recognition/main.cpp
 	<iostream>
 	<stdio.h>
 	<unistd.h>
@@ -243,4 +244,24 @@
 	<dirent.h>
 	<iostream>
 	<stdio.h>
+
+1364867286 source:/home/frederick/Code/OpenHGR/Recognition/src/HaarHSVHandThresholder.cpp
+	"HaarHSVHandThresholder.h"
+	<iostream>
+	<stdio.h>
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+
+1364870025 source:/home/frederick/Code/OpenHGR/Recognition/src/ConvexHullComparisonHandDetector.cpp
+	"ConvexHullComparisonHandDetector.h"
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
+	<dirent.h>
+	<iostream>
+	<stdio.h>
+
+1364842246 /home/frederick/Code/OpenHGR/Recognition/include/ConvexHullComparisonHandDetector.h
+	<AbstractHandDetector.h>
 
