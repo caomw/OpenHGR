@@ -13,25 +13,29 @@ HaarHSVHandThresholder::HaarHSVHandThresholder()
         printf("--(!)Error loading\n");
 
     // Debugging window / trackbars
-    namedWindow( "HaarHSVHandThresholder", CV_WINDOW_AUTOSIZE );
-    createTrackbar( "Element:\n 0: Rect - 1: Cross - 2: Ellipse", "HaarHSVHandThresholder", &morph_elem, 2, NULL );
-    createTrackbar( "Kernel size:\n 2n +1", "HaarHSVHandThresholder", &morph_size, 21, NULL );
+    //namedWindow( "HaarHSVHandThresholder", CV_WINDOW_AUTOSIZE );
+    //createTrackbar( "Element:\n 0: Rect - 1: Cross - 2: Ellipse", "HaarHSVHandThresholder", &morph_elem, 2, NULL );
+    //createTrackbar( "Kernel size:\n 2n +1", "HaarHSVHandThresholder", &morph_size, 21, NULL );
 }
 
 cv::Mat HaarHSVHandThresholder::thresholdHand ( cv::Mat input )
 {
-    Mat hsv, bw, bw2;
+    Mat hsv, bw, bw2, bw3;
     Mat frame = substractFace (input);
 
     cvtColor ( frame, hsv, CV_BGR2HSV);
-    inRange(hsv, minHSV, maxHSV, bw);
+    //inRange(hsv, minHSV, maxHSV, bw);
+
+    inRange(hsv, minHSV1, maxHSV1, bw2);
+    inRange(hsv, minHSV2, maxHSV2, bw3);
+    bitwise_or(bw2,bw3,bw);
 
     Mat element = getStructuringElement( morph_elem, Size( 2*morph_size + 1, 2*morph_size+1 ), Point( morph_size, morph_size ) );
     morphologyEx( bw, bw2, MORPH_CLOSE, element );
     bw = bw2;
 
     if ( isDebug() )
-        imshow("HaarHSVHandThresholder", bw);
+        imshow("HaarHSVHandThresholder", bw2);
 
     return bw;
 }

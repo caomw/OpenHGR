@@ -27,8 +27,10 @@ class HaarHSVHandThresholder : public AbstractHandThresholder
         int morph_size = 6;
 
         // HSV threshold
-        cv::Scalar minHSV = cv::Scalar(0,  50, 0);
-        cv::Scalar maxHSV = cv::Scalar(20, 190, 255);
+        cv::Scalar minHSV1 = cv::Scalar(0,50,0);
+        cv::Scalar maxHSV1 = cv::Scalar(19,200,255);
+        cv::Scalar minHSV2 = cv::Scalar(150,50,0);
+        cv::Scalar maxHSV2 = cv::Scalar(180,200,255);
 };
 
 #endif // HAARHSVHANDTHRESHOLDER_H
