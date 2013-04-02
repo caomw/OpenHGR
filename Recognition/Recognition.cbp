@@ -44,6 +44,7 @@
 		<Unit filename="include/AbstractHandDetector.h" />
 		<Unit filename="include/AbstractHandThresholder.h" />
 		<Unit filename="include/ContourComparisonHandDetector.h" />
+		<Unit filename="include/ConvexHullComparisonHandDetector.h" />
 		<Unit filename="include/GestureRecognizerFactory.h" />
 		<Unit filename="include/HaarAdaptiveHandThresholder.h" />
 		<Unit filename="include/HaarHSVHandThresholder.h" />
@@ -57,6 +58,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/AbstractFilter.cpp" />
 		<Unit filename="src/ContourComparisonHandDetector.cpp" />
+		<Unit filename="src/ConvexHullComparisonHandDetector.cpp" />
 		<Unit filename="src/GestureRecognizerFactory.cpp" />
 		<Unit filename="src/HaarAdaptiveHandThresholder.cpp" />
 		<Unit filename="src/HaarHSVHandThresholder.cpp" />
