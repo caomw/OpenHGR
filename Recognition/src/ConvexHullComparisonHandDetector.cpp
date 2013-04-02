@@ -96,7 +96,7 @@ int i = contourIndex;
              Point2f center;
              float radius;
              minEnclosingCircle(points,center,radius);
-             tmp = Rect(center.x-(radius/2),center.y+(radius/2),radius,radius);
+             tmp = Rect(center.x-(50),center.y+(50),100,100);
              return tmp;
 
              //RotatedRect rect = minAreaRect(points);

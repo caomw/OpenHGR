@@ -253,7 +253,7 @@
 	"opencv2/highgui/highgui.hpp"
 	"opencv2/imgproc/imgproc.hpp"
 
-1364870025 source:/home/frederick/Code/OpenHGR/Recognition/src/ConvexHullComparisonHandDetector.cpp
+1364870617 source:/home/frederick/Code/OpenHGR/Recognition/src/ConvexHullComparisonHandDetector.cpp
 	"ConvexHullComparisonHandDetector.h"
 	"opencv2/objdetect/objdetect.hpp"
 	"opencv2/highgui/highgui.hpp"
