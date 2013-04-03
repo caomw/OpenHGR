@@ -16,7 +16,7 @@
 	<File name="include/ContourComparisonHandDetector.h" open="0" top="0" tabpos="3">
 		<Cursor position="336" topLine="0" />
 	</File>
-	<File name="include/ConvexHullComparisonHandDetector.h" open="1" top="0" tabpos="2">
+	<File name="include/ConvexHullComparisonHandDetector.h" open="0" top="0" tabpos="2">
 		<Cursor position="356" topLine="0" />
 	</File>
 	<File name="include/GestureRecognizerFactory.h" open="0" top="0" tabpos="0">
@@ -37,13 +37,13 @@
 	<File name="include/SIFTGestureRecognizer.h" open="0" top="0" tabpos="0">
 		<Cursor position="66" topLine="0" />
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="803" topLine="3" />
+	<File name="main.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="908" topLine="7" />
 	</File>
-	<File name="src/ContourComparisonHandDetector.cpp" open="1" top="1" tabpos="4">
-		<Cursor position="541" topLine="6" />
+	<File name="src/ContourComparisonHandDetector.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="541" topLine="9" />
 	</File>
-	<File name="src/ConvexHullComparisonHandDetector.cpp" open="1" top="0" tabpos="3">
+	<File name="src/ConvexHullComparisonHandDetector.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="2126" topLine="6" />
 	</File>
 	<File name="src/GestureRecognizerFactory.cpp" open="0" top="0" tabpos="0">
@@ -55,7 +55,7 @@
 	<File name="src/HaarHistogramHSVHandThresholder.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="1671" topLine="60" />
 	</File>
-	<File name="src/HaarLumaHandThresholder.cpp" open="0" top="0" tabpos="2">
+	<File name="src/HaarLumaHandThresholder.cpp" open="1" top="0" tabpos="2">
 		<Cursor position="582" topLine="0" />
 	</File>
 	<File name="src/HaarYCbCrEllipseHandThresholder.cpp" open="0" top="0" tabpos="0">

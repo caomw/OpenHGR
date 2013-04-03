@@ -19,8 +19,10 @@ using namespace cv;
 
 int main()
 {
-    char* benchmark_file = "../data/Benchmark-Fred.avi";
+    char* benchmark_file = "../data/Benchmarks/2.avi";
     //char* benchmark_file = "../data/benchmark1.avi";
+    //char* benchmark_file = "../data/benchmark3.avi";
+
     CvCapture* capture;
     Mat frame, f, thresholdFrame;
 
@@ -30,8 +32,8 @@ int main()
     GestureRecognizerFactory grf;
 
     // Filters
-    AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_LUMA);
-    AbstractHandDetector* handDetector = hdf.createInstance(CONVEX_HULL);
+    AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_HSV);
+    AbstractHandDetector* handDetector = hdf.createInstance(CONTOUR_COMPARISON);
     AbstractGestureRecognizer* gestureRecognizer = grf.createInstance(SIFT);
 
     // Debugging
