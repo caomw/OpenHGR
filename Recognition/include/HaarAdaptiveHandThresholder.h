@@ -13,9 +13,18 @@ class HaarAdaptiveHandThresholder : public AbstractHandThresholder
         virtual cv::Mat thresholdHand ( cv::Mat input );
     protected:
     private:
-        void displayBuffer(IplImage *rgbDestImage, IplImage *buffer, int rValue, int gValue, int bValue);
+        cv::Mat substractFace ( cv::Mat input );
 
         IplImage *filterMask = NULL;
+
+        // Face detection
+        std::string face_cascade_name = "haarcascade_frontalface_alt.xml";
+        cv::CascadeClassifier face_cascade;
+
+
+    // Morphology parameters
+    int morph_elem = cv::MORPH_ELLIPSE;
+    int morph_size = 6;
 };
 
 #endif // HAARADAPTIVEHANDTHRESHOLDER_H

@@ -1,4 +1,6 @@
 #include "HaarAdaptiveHandThresholder.h"
+#include <iostream>
+#include <stdio.h>
 
 #include "opencv2/objdetect/objdetect.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -10,37 +12,31 @@ using namespace cv;
 
 HaarAdaptiveHandThresholder::HaarAdaptiveHandThresholder()
 {
+    if( !face_cascade.load( face_cascade_name ) )
+        cout << "--(!)Error loading\n" <<endl;
 }
 
 cv::Mat HaarAdaptiveHandThresholder::thresholdHand ( cv::Mat input )
 {
-    IplImage *img = new IplImage(input);
+    Mat frame = substractFace (input);
+    Mat bw;
+    IplImage *img = new IplImage(frame);
     if ( filterMask == NULL )
         filterMask = cvCreateImage( cvSize(img->width, img->height), IPL_DEPTH_8U, 1);
 
     CvAdaptiveSkinDetector filter(1, CvAdaptiveSkinDetector::MORPHING_METHOD_ERODE_DILATE);
     filter.process(img, filterMask);
 
+    Mat mat(filterMask);
+    inRange(mat, Scalar(1,1,1), Scalar(255,255,255), frame);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Mat output(filterMask);
+    Mat element = getStructuringElement( morph_elem, Size( 2*morph_size + 1, 2*morph_size+1 ), Point( morph_size, morph_size ) );
+    morphologyEx( frame, bw, MORPH_CLOSE, element );
 
     if ( isDebug() )
-        imshow ( "HaarAdaptiveHandThresholder", output );
+        imshow ( "HaarAdaptiveHandThresholder", bw);
 
-    return output;
+    return frame;
 }
 
 HaarAdaptiveHandThresholder::~HaarAdaptiveHandThresholder()
@@ -49,35 +45,26 @@ HaarAdaptiveHandThresholder::~HaarAdaptiveHandThresholder()
         cvReleaseImage ( &filterMask );
 }
 
-void HaarAdaptiveHandThresholder::displayBuffer(IplImage *rgbDestImage, IplImage *buffer, int rValue, int gValue, int bValue)
+Mat HaarAdaptiveHandThresholder::substractFace ( Mat input )
 {
-    int x, y, nWidth, nHeight;
-    double destX, destY, dx, dy;
-    uchar c;
-    unsigned char *pSrc;
+    std::vector<Rect> faces;
+    Mat output = input.clone();
 
-    nWidth = buffer->width;
-    nHeight = buffer->height;
+    Mat frame_gray;
 
-    dx = double(rgbDestImage->width)/double(nWidth);
-    dy = double(rgbDestImage->height)/double(nHeight);
+    cvtColor( input, frame_gray, CV_BGR2GRAY );
 
-    destX = 0;
-    for (x = 0; x < nWidth; x++)
+    // Face detection
+    face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(30, 30) );
+
+    cout << faces.size();
+    // Face substraction
+    for( int i = 0; i < faces.size(); i++ )
     {
-        destY = 0;
-        for (y = 0; y < nHeight; y++)
-        {
-            c = ((uchar*)(buffer->imageData + buffer->widthStep*y))[x];
-
-            if (c)
-            {
-                pSrc = (unsigned char *)rgbDestImage->imageData + rgbDestImage->widthStep*int(destY) + (int(destX)*rgbDestImage->nChannels);
-                //ASD_RGB_SET_PIXEL(pSrc, rValue, gValue, bValue);
-            }
-            destY += dy;
-        }
-        destY = 0;
-        destX += dx;
+        // Circle
+        Point center ( faces[i].x + faces[i].width / 2.0, faces[i].y + faces[i].height / 2.0);
+        circle( output, center, faces[i].width / 1.4, Scalar( 0, 0, 0), -1, 8 );
     }
-};
+
+    return output;
+}
