@@ -21,6 +21,7 @@ cv::Mat HaarYCbCrHandThresholder::thresholdHand ( cv::Mat input )
     cvtColor(substractFace(input), ycbcr, CV_BGR2YCrCb, 0);
     inRange(ycbcr, Scalar(0,133,77), Scalar(255,173,127), bw);
 
+    //Mat element = getStructuringElement( morph_elem, Size( 2*morph_size + 1, 2*morph_size+1 ), Point( morph_size, morph_size ) );
     //morphologyEx( bw, bw2, MORPH_CLOSE, element );
     //bw = bw2;
 
