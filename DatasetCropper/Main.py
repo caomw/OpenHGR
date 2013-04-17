@@ -3,7 +3,7 @@ import numpy as np
 import os
 import time
 
-INPUTDIR = "/home/mathieu/Pictures/mains/"
+INPUTDIR = "/home/mathieu/Pictures/mains"
 OUTPUTDIR = "output"
 
 def getArmMask ( image ):
@@ -30,16 +30,31 @@ def cropImage ( filename, outputFilename ):
     image = cv2.imread(filename )
     
     #Threshold
-    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-    bw = cv2.inRange(hsv, np.array([0,50,0]), np.array([30,255,255]))
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)       #30
+    bw = cv2.inRange(hsv, np.array([0,50,0]), np.array([70,255,255]))
     
-    element = cv2.getStructuringElement(cv2.MORPH_CROSS,(5,5))
-    for i in range(0,2):
-        bw2 = cv2.erode(bw, element)
-        bw = cv2.dilate(bw, element)
+    ######################### TECHNIQUE 1
+    #element = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5))
+    #bw = cv2.dilate(getMask(image),element)
+
+    #for i in range(0,3):
+    #    bw2 = cv2.dilate(bw,element)
+    #    bw = cv2.dilate(bw2,element)
+     
+    ########################### TECHNIQUE 2
+    element = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5))
+    bw2 = cv2.erode(bw,element)
+    bw = cv2.erode(bw2,element)
     
-    #Contour
+    for i in range(0,5):
+        bw2 = cv2.dilate(bw,element)
+        bw = cv2.dilate(bw2,element)
+    
+    
+        
     bw2 = cv2.GaussianBlur(bw, (5,5), 0)
+    #cv2.imwrite("aaa.jpg" ,bw2 )
+    ##########################################
     canny = cv2.Canny(bw2, 0, 300)
     
     contours, hierarchy = cv2.findContours(canny, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)   
@@ -69,34 +84,41 @@ def cropImage ( filename, outputFilename ):
     #Crop
     if biggestContourId != -1:
         x,y,w,h=tuple(biggestRect)
+        #if w > h:
+        #    l = w
+        #else:
+        #    l = h
+        #x = x + w - l
+        #y = y + h - l    
+        #cropped = image[y:y+l,x:x+l]
+        #resized = cv2.resize(cropped, (100,100)) 
+        #1gray = cv2.cvtColor(resized,cv2.COLOR_BGR2GRAY)
+        #h += 15
+        cropped = image[y:y+h, x:x+w]
+        gray = cv2.cvtColor(cropped, cv2.COLOR_BGR2GRAY)
         if w > h:
-            l = w
+            h = int(float(h)/w*100)
+            w = 100
         else:
-            l = h
-        x = x + w - l
-        y = y + h - l    
-        cropped = image[y:y+l,x:x+l]
-        resized = cv2.resize(cropped, (100,100))
-        gray = cv2.cvtColor(resized,cv2.COLOR_BGR2GRAY)
-        cv2.imwrite(outputFilename ,gray )
-    
-    
-    mask = getMask(image)    
-    cv2.imwrite("aaa.jpg" ,cv2.bitwise_and(image, image, mask=mask) )
+            w = int(float(w)/h*100)
+            h = 100
+                        
+        resized = cv2.resize(gray,(w,h))
+        cv2.imwrite(outputFilename ,resized )
 
 startTime = time.time()
 
-#for path, dirs, filenames in os.walk("/home/mathieu/Pictures/mains/"):
-#    for f in filenames:
-#        inputFile = path + "/" + f
-#        outputDirectory = OUTPUTDIR + "/" + path.replace(INPUTDIR, "")
-#        outputFile = outputDirectory + "/" + f
-#        if not os.path.exists(outputDirectory): os.makedirs(outputDirectory)
-#        cropImage (inputFile, outputFile)
+for path, dirs, filenames in os.walk(INPUTDIR):
+    for f in filenames:
+        inputFile = path + "/" + f
+        outputDirectory = OUTPUTDIR + "/" + path.replace(INPUTDIR, "")
+        outputFile = outputDirectory + "/" + f
+        if not os.path.exists(outputDirectory): os.makedirs(outputDirectory)
+        cropImage (inputFile, outputFile)
 
-cropImage("/home/mathieu/Pictures/mains/Martin/Paume/Image-4.jpg","test.jpg")
+#cropImage("/home/mathieu/Pictures/mains/Martin/Pouce/Image-1.jpg","test.jpg")
 
-print "OVER!" + str(time.time() - startTime)
+#print "OVER!" + str(time.time() - startTime)
 
 
 
