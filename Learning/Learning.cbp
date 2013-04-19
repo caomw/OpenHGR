@@ -17,6 +17,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="`pkg-config opencv --libs`" />
+					<Add option="`-lboost_filesystem`" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -31,6 +32,9 @@
 				<Linker>
 					<Add option="-s" />
 					<Add option="`pkg-config opencv --libs`" />
+					<Add option="`-lboost_filesystem`" />
+					<Add library="boost_filesystem" />
+					<Add library="/usr/lib/libboost_system.so" />
 				</Linker>
 			</Target>
 		</Build>
@@ -38,7 +42,9 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/AlgorithmTester.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/AlgorithmTester.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

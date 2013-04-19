@@ -43,54 +43,7 @@
 	<File name="include/SIFTGestureRecognizer.h" open="0" top="0" tabpos="0">
 		<Cursor position="66" topLine="0" />
 	</File>
-<<<<<<< HEAD
-	<File name="main.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="908" topLine="7" />
-	</File>
-	<File name="src/ContourComparisonHandDetector.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="541" topLine="9" />
-	</File>
-	<File name="src/ConvexHullComparisonHandDetector.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="2126" topLine="6" />
-=======
-	<File name="main.cpp" open="1" top="1" tabpos="0">
-		<Cursor position="853" topLine="0" />
-	</File>
-	<File name="src/ContourComparisonHandDetector.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="541" topLine="6" />
-	</File>
-	<File name="src/ConvexHullComparisonHandDetector.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="1922" topLine="26" />
->>>>>>> f1b642e745acb889ef137faff56c1b2ed211d727
-	</File>
-	<File name="src/GestureRecognizerFactory.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="316" topLine="0" />
-	</File>
-	<File name="src/HaarAdaptiveHandThresholder.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="885" topLine="9" />
-	</File>
-	<File name="src/HaarHSVHandThresholder.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="783" topLine="7" />
-	</File>
-	<File name="src/HaarHistogramHSVHandThresholder.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="1671" topLine="69" />
-	</File>
-	<File name="src/HaarLumaHandThresholder.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="582" topLine="0" />
-	</File>
-	<File name="src/HaarYCbCrEllipseHandThresholder.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="707" topLine="15" />
-	</File>
-	<File name="src/HaarYCbCrHandThresholder.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="687" topLine="0" />
-	</File>
-	<File name="src/HandDetectorFactory.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="33" topLine="0" />
-	</File>
-	<File name="src/HandThresholderFactory.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="952" topLine="0" />
-	</File>
-	<File name="src/SIFTGestureRecognizer.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="394" topLine="0" />
+	<File name="main.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="661" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>
