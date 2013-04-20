@@ -2,17 +2,10 @@
 1361735814 source:/home/mathieu/Desktop/OpenHGR/Learning/main.cpp
 	<iostream>
 
-1364757393 source:/home/frederick/Code/OpenHGR/Learning/main.cpp
+1366435023 source:/home/frederick/Code/OpenHGR/Learning/main.cpp
+	<fstream>
 	<iostream>
-	<sys/types.h>
-	<dirent.h>
-	"opencv2/core/core.hpp"
-	"opencv2/features2d/features2d.hpp"
-	"opencv2/highgui/highgui.hpp"
-	"opencv2/nonfree/nonfree.hpp"
-	"opencv2/calib3d/calib3d.hpp"
-	"opencv2/imgproc/imgproc.hpp"
-	"opencv2/ml/ml.hpp"
+	"AlgorithmTester.h"
 
 1351205713 /usr/local/include/opencv2/core/core.hpp
 	"opencv2/core/types_c.h"
@@ -106,7 +99,7 @@
 	<string>
 	<iostream>
 
-1366407566 source:/home/frederick/Code/OpenHGR/Learning/src/AlgorithmTester.cpp
+1366435944 source:/home/frederick/Code/OpenHGR/Learning/src/AlgorithmTester.cpp
 	"AlgorithmTester.h"
 	<vector>
 	<boost/filesystem.hpp>
@@ -118,8 +111,11 @@
 	"opencv2/calib3d/calib3d.hpp"
 	"opencv2/imgproc/imgproc.hpp"
 	"opencv2/ml/ml.hpp"
+	<boost/timer.hpp>
+	"AbstractLearningModel.h"
+	"SVMLearningModel.h"
 
-1366407657 /home/frederick/Code/OpenHGR/Learning/include/AlgorithmTester.h
+1366433356 /home/frederick/Code/OpenHGR/Learning/include/AlgorithmTester.h
 	<vector>
 	<boost/filesystem.hpp>
 	<opencv2/opencv.hpp>
@@ -130,6 +126,7 @@
 	"opencv2/calib3d/calib3d.hpp"
 	"opencv2/imgproc/imgproc.hpp"
 	"opencv2/ml/ml.hpp"
+	"AbstractLearningModel.h"
 
 1343256930 /usr/local/include/opencv2/opencv.hpp
 	"opencv2/core/core_c.h"
@@ -196,4 +193,20 @@
 	<map>
 	<set>
 	<valarray>
+
+1366433002 source:/home/frederick/Code/OpenHGR/Learning/src/SVMLearningModel.cpp
+	"SVMLearningModel.h"
+	<opencv2/opencv.hpp>
+	"opencv2/core/core.hpp"
+	"opencv2/ml/ml.hpp"
+
+1366426910 /home/frederick/Code/OpenHGR/Learning/include/SVMLearningModel.h
+	"AbstractLearningModel.h"
+	<opencv2/opencv.hpp>
+	"opencv2/core/core.hpp"
+	"opencv2/ml/ml.hpp"
+
+1366427021 /home/frederick/Code/OpenHGR/Learning/include/AbstractLearningModel.h
+	<opencv2/opencv.hpp>
+	"opencv2/core/core.hpp"
 

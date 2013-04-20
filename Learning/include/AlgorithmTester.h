@@ -12,6 +12,8 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/ml/ml.hpp"
 
+#include "AbstractLearningModel.h"
+
 using namespace std;
 using namespace boost::filesystem;
 using namespace cv;
@@ -19,16 +21,24 @@ using namespace cv;
 enum DescriptorDetectorType { SIFT_Detector, SURF_Detector };
 enum DescriptorExtractorType { SIFT_Extractor, SURF_Extractor };
 enum DescriptorMatcherType { FlannBased };
-enum StatisticalModelType { SVM };
+enum StatisticalModelType { SVM_Model };
 
 class AlgorithmTester
 {
     public:
         AlgorithmTester(DescriptorDetectorType descriptorDetectorType, DescriptorExtractorType descriptorExtractorType, DescriptorMatcherType descriptorMatcherType,
-                        StatisticalModelType statisticalModelType, int kValue, vector<string> trainingFolders, string testFolder );
+                        StatisticalModelType statisticalModelType, int kValue, vector<string> trainingFolders, string _testFolder );
 
         void run();
         virtual ~AlgorithmTester();
+
+        const static int NBR_GESTURE = 5;
+        long cptrKeypointsTraining = 0;
+        long cptrImagesTraining = 0;
+        double timeElapsedLearning = 0;
+        double timeElapsedTesting = 0;
+        double errorRate = 0;
+        int gesturesCptr[NBR_GESTURE][NBR_GESTURE+1];
 
     protected:
 
@@ -38,7 +48,7 @@ class AlgorithmTester
         void extractTrainingVocabulary(const path& basepath, bool training);
         void extractBOWDescriptor(const path& basepath, Mat& descriptors, Mat& labels);
 
-        const static int NBR_GESTURE = 5;
+
 
         Ptr<DescriptorMatcher> matcher;
         Ptr<DescriptorExtractor> extractor;
@@ -48,18 +58,19 @@ class AlgorithmTester
         string testFolder;
 
         TermCriteria tc;
-        BOWKMeansTrainer bowTrainer;
+        BOWKMeansTrainer* bowTrainer;
         BOWImgDescriptorExtractor* bowDE;
 
         int dictionarySize;
         int retries = 1;
         int flags = KMEANS_PP_CENTERS;
-        long cptrKeypointsTraining = 0;
-        long cptrImagesTraining = 0;
+
 
         // First index is gestureIndex
         // Second index is : 0 for total for this gesture and rest is total of matching against corresponding gesture
-        int gesturesCptr[NBR_GESTURE][NBR_GESTURE+1];
+
+
+        AbstractLearningModel* learner;
 };
 
 #endif // ALGORITHMTESTER_H

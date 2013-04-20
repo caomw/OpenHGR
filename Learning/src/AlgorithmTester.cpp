@@ -10,6 +10,10 @@
 #include "opencv2/calib3d/calib3d.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/ml/ml.hpp"
+#include <boost/timer.hpp>
+
+#include "AbstractLearningModel.h"
+#include "SVMLearningModel.h"
 
 using namespace std;
 using namespace boost::filesystem;
@@ -22,9 +26,9 @@ AlgorithmTester::AlgorithmTester(DescriptorDetectorType descriptorDetectorType, 
     dictionarySize(kValue),
     trainingFolders(_trainingFolders),
     testFolder(_testFolder),
-    tc(CV_TERMCRIT_ITER, 10, 0.001),
-    bowTrainer(dictionarySize,tc,retries,flags)
+    tc(CV_TERMCRIT_ITER, 10, 0.001)
 {
+
     switch (descriptorDetectorType)
     {
         case SIFT_Detector:
@@ -55,55 +59,78 @@ AlgorithmTester::AlgorithmTester(DescriptorDetectorType descriptorDetectorType, 
             break;
     }
 
+    switch(statisticalModelType)
+    {
+        case SVM_Model:
+        default:
+            learner = new SVMLearningModel();
+    }
+
     bowDE = new BOWImgDescriptorExtractor(extractor,matcher);
+    bowTrainer = new BOWKMeansTrainer(dictionarySize,tc,retries,flags);
+
+    memset(gesturesCptr, 0, sizeof(gesturesCptr));
 
 }
 
 AlgorithmTester::~AlgorithmTester()
 {
     delete bowDE;
+    delete bowTrainer;
+    delete learner;
 }
 
 
 void AlgorithmTester::extractTrainingVocabulary(const path& basepath, bool training)
 {
-    for (directory_iterator iter = directory_iterator(basepath); iter
-			!= directory_iterator(); iter++) {
+    for (directory_iterator iter = directory_iterator(basepath); iter != directory_iterator(); iter++)
+    {
 		directory_entry entry = *iter;
 
-		if (is_directory(entry.path())) {
+		if (is_directory(entry.path()))
+		{
 
-			cout << "Processing directory " << entry.path().string() << endl;
+			//cout << "Processing directory " << entry.path().string() << endl;
 			extractTrainingVocabulary(entry.path(),training);
 
-		} else {
+		}
+        else
+        {
 
 			path entryPath = entry.path();
-			if (entryPath.extension() == ".pgm" || entryPath.extension() == ".jpg") {
+			if (entryPath.extension() == ".pgm" || entryPath.extension() == ".jpg")
+			{
 
-				cout << "Processing file " << entryPath.string() << endl;
+				//cout << "Processing file " << entryPath.string() << endl;
 
 				Mat img = imread(entryPath.string());
-				if (!img.empty()) {
+
+				if (!img.empty())
+				{
 					vector<KeyPoint> keypoints;
 					detector->detect(img, keypoints);
-					if (keypoints.empty()) {
-						cerr << "Warning: Could not find key points in image: "
-								<< entryPath.string() << endl;
-					} else {
-						Mat features;						extractor->compute(img, keypoints, features);
-						cout << "Nbr de keypoints : " << keypoints.size() << endl;
+
+					if (keypoints.empty())
+					{
+						cerr << "Warning: Could not find key points in image: " << entryPath.string() << endl;
+					}
+					else
+					{
+						Mat features;
+						extractor->compute(img, keypoints, features);
+						//cout << "Nbr de keypoints : " << keypoints.size() << endl;
 
 						if (training)
 						{
                             cptrKeypointsTraining += keypoints.size();
                             cptrImagesTraining++;
 						}
-						bowTrainer.add(features);
+						bowTrainer->add(features);
 					}
-				} else {
-					cerr << "Warning: Could not read image: "
-							<< entryPath.string() << endl;
+				}
+				else
+				{
+					cerr << "Warning: Could not read image: " << entryPath.string() << endl;
 				}
 
 			}
@@ -113,38 +140,49 @@ void AlgorithmTester::extractTrainingVocabulary(const path& basepath, bool train
 
 void AlgorithmTester::extractBOWDescriptor(const path& basepath, Mat& descriptors, Mat& labels)
 {
-    for (directory_iterator iter = directory_iterator(basepath); iter
-			!= directory_iterator(); iter++) {
+    for (directory_iterator iter = directory_iterator(basepath); iter != directory_iterator(); iter++)
+    {
 		directory_entry entry = *iter;
-		if (is_directory(entry.path())) {
-			cout << "Processing directory " << entry.path().string() << endl;
+		if (is_directory(entry.path()))
+		{
+			//cout << "Processing directory " << entry.path().string() << endl;
 			extractBOWDescriptor(entry.path(), descriptors, labels);
-		} else {
+		}
+		else
+		{
 			path entryPath = entry.path();
-			if (entryPath.extension() == ".pgm") {
-				cout << "Processing file " << entryPath.string() << endl;
+
+			if (entryPath.extension() == ".pgm" || entryPath.extension() == ".jpg")
+			{
+				//cout << "Processing file " << entryPath.string() << endl;
 				Mat img = imread(entryPath.string());
-				if (!img.empty()) {
+
+				if (!img.empty())
+				{
+
 					vector<KeyPoint> keypoints;
 					detector->detect(img, keypoints);
-					if (keypoints.empty()) {
-						cerr << "Warning: Could not find key points in image: "
-								<< entryPath.string() << endl;
-					} else {
+
+					if (keypoints.empty())
+					{
+						cerr << "Warning: Could not find key points in image: " << entryPath.string() << endl;
+					}
+					else
+					{
 						Mat bowDescriptor;
+						char tmp = entryPath.filename().c_str()[0];
+						float label= atof(&tmp);
+						cout << "Label : " << label << endl;
+
 						bowDE->compute(img, keypoints, bowDescriptor);
 						descriptors.push_back(bowDescriptor);
-						float label=atof(entryPath.filename().c_str());
-                        cout << "Label : " << label << endl;
 						labels.push_back(label);
 
-						gesturesCptr[label-1][0]++;
-
-
 					}
-				} else {
-					cerr << "Warning: Could not read image: "
-							<< entryPath.string() << endl;
+				}
+				else
+				{
+					cerr << "Warning: Could not read image: " << entryPath.string() << endl;
 				}
 			}
 		}
@@ -154,5 +192,75 @@ void AlgorithmTester::extractBOWDescriptor(const path& basepath, Mat& descriptor
 
 void AlgorithmTester::run()
 {
+    boost::timer timerLearning;
+
+    cout << "Creating dictionary..." << endl;
+
+    for(vector<string>::iterator iter=trainingFolders.begin(); iter != trainingFolders.end(); iter++)
+    {
+        extractTrainingVocabulary(path(*iter),true);
+    }
+
+	vector<Mat> descriptors = bowTrainer->getDescriptors();
+
+	cout << "Clustering "<< cptrKeypointsTraining <<" features"<<endl;
+	cout << "NBR de features moyen : " << cptrKeypointsTraining/cptrImagesTraining << endl;
+
+
+    Mat dictionary = bowTrainer->cluster();
+
+
+
+    cout << "Done clustering" << endl;
+    bowDE->setVocabulary(dictionary);
+
+	cout<<"Processing training data..."<<endl;
+	Mat trainingData(0, dictionarySize, CV_32FC1);
+
+	Mat labels(0, 1, CV_32FC1);
+
+    for(vector<string>::iterator iter=trainingFolders.begin(); iter != trainingFolders.end(); iter++)
+    {
+        extractBOWDescriptor(path(*iter), trainingData, labels);
+    }
+
+
+	cout << "Training classifier.... using SVM" << endl;
+	learner->train(trainingData,labels);
+
+	timeElapsedLearning = timerLearning.elapsed();
+
+	boost::timer timerTesting;
+
+    cout<<"Processing evaluation data..."<<endl;
+	Mat evalData(0, dictionarySize, CV_32FC1);
+	Mat groundTruth(0, 1, CV_32FC1);
+	extractBOWDescriptor(path(testFolder), evalData, groundTruth);
+
+	Mat results;
+
+	for (int i=0; i < evalData.rows; i++)
+	{
+        results.push_back(learner->predict(evalData.row(i)));
+	}
+
+	timeElapsedTesting = timerTesting.elapsed();
+
+    //Evaluation stats
+    errorRate = (double) countNonZero(groundTruth - results) / evalData.rows;
+
+    for(int i=0; i < groundTruth.rows; i++)
+    {
+        gesturesCptr[(int)groundTruth.at<float>(i,0)-1][(int)(results.at<float>(i,0))]++;
+        gesturesCptr[(int)groundTruth.at<float>(i,0)-1][0]++;
+
+    }
+
+
+
+	cout << "Error rate: " << errorRate << endl;
+
+	cout << "Time Elapsed : " << timerLearning.elapsed() << endl;
+
 
 }

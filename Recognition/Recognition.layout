@@ -5,7 +5,7 @@
 		<Cursor position="185" topLine="0" />
 	</File>
 	<File name="include/AbstractGestureRecognizer.h" open="0" top="0" tabpos="0">
-		<Cursor position="349" topLine="0" />
+		<Cursor position="396" topLine="0" />
 	</File>
 	<File name="include/AbstractHandDetector.h" open="0" top="0" tabpos="0">
 		<Cursor position="215" topLine="0" />
@@ -20,7 +20,7 @@
 		<Cursor position="356" topLine="0" />
 	</File>
 	<File name="include/GestureRecognizerFactory.h" open="0" top="0" tabpos="0">
-		<Cursor position="283" topLine="0" />
+		<Cursor position="114" topLine="0" />
 	</File>
 	<File name="include/HaarAdaptiveHandThresholder.h" open="0" top="0" tabpos="0">
 		<Cursor position="746" topLine="0" />
