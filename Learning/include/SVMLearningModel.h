@@ -10,6 +10,7 @@
 class SVMLearningModel : public AbstractLearningModel
 {
     public:
+        SVMLearningModel();
         float predict(const cv::Mat& sample);
         void train(const cv::Mat& trainData, const cv::Mat& responses);
     protected:

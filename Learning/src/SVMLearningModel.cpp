@@ -4,6 +4,8 @@
 #include "opencv2/core/core.hpp"
 #include "opencv2/ml/ml.hpp"
 
+SVMLearningModel::SVMLearningModel(){}
+
 float SVMLearningModel::predict(const cv::Mat& sample)
 {
     return svm.predict(sample);

@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
 
-    for (int i=550; i <= 2500; i+=25)
+    for (int i=600; i <= 2500; i+=25)
     {
         for (int j=0; j<3;j++)
         {
@@ -47,7 +47,7 @@ int main()
 
 
             //Writing stats
-            out << i << ";SURF;SURF;FlannBased;SVM;" << test->cptrKeypointsTraining << ";" << test->cptrImagesTraining/test->cptrImagesTraining << ";"
+            out << i << ";SURF;SURF;FlannBased;SVM;" << test->cptrKeypointsTraining << ";" << test->cptrKeypointsTraining/test->cptrImagesTraining << ";"
                 << test->timeElapsedLearning << ";" << test->timeElapsedTesting << ";" << test->errorRate << ";";
 
             for (int k=0; k < test->NBR_GESTURE; k++)

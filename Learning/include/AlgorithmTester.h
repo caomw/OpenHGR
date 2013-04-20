@@ -30,7 +30,7 @@ class AlgorithmTester
                         StatisticalModelType statisticalModelType, int kValue, vector<string> trainingFolders, string _testFolder );
 
         void run();
-        virtual ~AlgorithmTester();
+        ~AlgorithmTester();
 
         const static int NBR_GESTURE = 5;
         long cptrKeypointsTraining = 0;
