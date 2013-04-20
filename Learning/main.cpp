@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
 
-    for (int i=600; i <= 2500; i+=25)
+    for (int i=1200; i <= 1500; i+=25)
     {
         for (int j=0; j<3;j++)
         {
