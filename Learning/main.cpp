@@ -7,11 +7,11 @@ using namespace std;
 int main()
 {
 
-    for (int i=5; i <= 2500; i+=5)
+    for (int i=550; i <= 2500; i+=25)
     {
         for (int j=0; j<3;j++)
         {
-            ofstream out ( "/home/frederick/Code/OpenHGR/results.csv", ios::app );
+            ofstream out ( "/home/frederick/Code/OpenHGR/results2.csv", ios::app );
 
             cout << "Testing K = " << i << endl;
             AlgorithmTester* test;
@@ -50,11 +50,11 @@ int main()
             out << i << ";SURF;SURF;FlannBased;SVM;" << test->cptrKeypointsTraining << ";" << test->cptrImagesTraining/test->cptrImagesTraining << ";"
                 << test->timeElapsedLearning << ";" << test->timeElapsedTesting << ";" << test->errorRate << ";";
 
-            for (int i=0; i < test->NBR_GESTURE; i++)
+            for (int k=0; k < test->NBR_GESTURE; k++)
             {
-                for (int j=0; j <= test->NBR_GESTURE; j++)
+                for (int l=0;  l<= test->NBR_GESTURE; l++)
                 {
-                    out << test->gesturesCptr[i][j] << ";";
+                    out << test->gesturesCptr[k][l] << ";";
                 }
             }
             out << endl;
