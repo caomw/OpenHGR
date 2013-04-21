@@ -27,7 +27,7 @@ class AlgorithmTester
 {
     public:
         AlgorithmTester(DescriptorDetectorType descriptorDetectorType, DescriptorExtractorType descriptorExtractorType, DescriptorMatcherType descriptorMatcherType,
-                        StatisticalModelType statisticalModelType, int kValue, vector<string> trainingFolders, string _testFolder );
+                        StatisticalModelType statisticalModelType, int kValue, vector<string> trainingFolders, string _testFolder, vector<int> secondTrainingFolders );
 
         void run();
         ~AlgorithmTester();
@@ -39,6 +39,7 @@ class AlgorithmTester
         double timeElapsedTesting = 0;
         double errorRate = 0;
         int gesturesCptr[NBR_GESTURE][NBR_GESTURE+1];
+        int gesturesChangedcptr = 0;
 
     protected:
 
@@ -46,7 +47,7 @@ class AlgorithmTester
     private:
 
         void extractTrainingVocabulary(const path& basepath, bool training);
-        void extractBOWDescriptor(const path& basepath, Mat& descriptors, Mat& labels);
+        void extractBOWDescriptor(const path& basepath, bool training, Mat& descriptors, Mat& labels, Mat& descriptors2, Mat& labels2);
 
 
 
@@ -55,15 +56,20 @@ class AlgorithmTester
         Ptr<FeatureDetector> detector;
 
         vector<string> trainingFolders;
+        vector<int> secondTrainingIndex;
         string testFolder;
 
         TermCriteria tc;
         BOWKMeansTrainer* bowTrainer;
         BOWImgDescriptorExtractor* bowDE;
 
+        BOWKMeansTrainer* bowTrainerSecond;
+        BOWImgDescriptorExtractor* bowDESecond;
+
         int dictionarySize;
         int retries = 1;
         int flags = KMEANS_PP_CENTERS;
+
 
 
         // First index is gestureIndex
@@ -71,6 +77,7 @@ class AlgorithmTester
 
 
         AbstractLearningModel* learner;
+        AbstractLearningModel* learnerSecond;
 };
 
 #endif // ALGORITHMTESTER_H

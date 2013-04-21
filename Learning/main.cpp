@@ -7,16 +7,20 @@ using namespace std;
 int main()
 {
 
-    for (int i=1200; i <= 1500; i+=25)
+    for (int i=2300; i <= 2300; i+=25)
     {
         for (int j=0; j<3;j++)
         {
-            ofstream out ( "/home/frederick/Code/OpenHGR/results2.csv", ios::app );
+            ofstream out ( "/home/frederick/Code/OpenHGR/resultsSecondPass.csv", ios::app );
 
             cout << "Testing K = " << i << endl;
             AlgorithmTester* test;
             vector<string> trainingFolders;
             string testFolder;
+            vector<int> secondTraining;
+
+            secondTraining.push_back(1);
+            secondTraining.push_back(5);
 
             if (j ==0)
             {
@@ -40,7 +44,7 @@ int main()
                 out << 2 << ";" << 3 << ";" << 1 << ";";
             }
 
-            test = new AlgorithmTester(SURF_Detector,SURF_Extractor,FlannBased,SVM_Model,i,trainingFolders,testFolder);
+            test = new AlgorithmTester(SURF_Detector,SURF_Extractor,FlannBased,SVM_Model,i,trainingFolders,testFolder,secondTraining);
 
             test->run();
 
