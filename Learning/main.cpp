@@ -11,7 +11,7 @@ int main()
     {
         for (int j=0; j<3;j++)
         {
-            ofstream out ( "/home/frederick/Code/OpenHGR/resultsDetailsWrong.csv", ios::app );
+            ofstream out ( "/home/frederick/Code/OpenHGR/resultsRealWorld1.csv", ios::app );
 
             cout << "Testing K = " << i << endl;
             AlgorithmTester* test;
@@ -26,7 +26,7 @@ int main()
             {
                 trainingFolders.push_back("/home/frederick/Code/OpenHGR/data/Dataset2/1.DataSet");
                 trainingFolders.push_back("/home/frederick/Code/OpenHGR/data/Dataset2/2.DataSet");
-                testFolder = "/home/frederick/Code/OpenHGR/data/Dataset2/3.DataSet";
+                testFolder = "/home/frederick/Code/OpenHGR/Rapport/HandSegmentationResults";
                 out << 1 << ";" << 2 << ";" << 3 << ";";
             }
             else if (j==1)

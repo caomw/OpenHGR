@@ -72,7 +72,7 @@
 1343256930 /usr/local/include/opencv2/core/core_c.h
 	"opencv2/core/types_c.h"
 
-1366607090 /home/frederick/Code/OpenHGR/Recognition/include/SIFTGestureRecognizer.h
+1366609557 /home/frederick/Code/OpenHGR/Recognition/include/SIFTGestureRecognizer.h
 	<vector>
 	<boost/filesystem.hpp>
 	<opencv2/opencv.hpp>
@@ -232,12 +232,22 @@
 	<stdio.h>
 	"opencv2/imgproc/imgproc.hpp"
 
-1364698584 source:/home/frederick/Code/OpenHGR/Recognition/src/SIFTGestureRecognizer.cpp
+1366607682 source:/home/frederick/Code/OpenHGR/Recognition/src/SIFTGestureRecognizer.cpp
 	"SIFTGestureRecognizer.h"
+	"AbstractLearningModel.h"
+	<vector>
+	<boost/filesystem.hpp>
+	<opencv2/opencv.hpp>
+	"opencv2/core/core.hpp"
+	"opencv2/features2d/features2d.hpp"
 	"opencv2/highgui/highgui.hpp"
+	"opencv2/nonfree/nonfree.hpp"
+	"opencv2/calib3d/calib3d.hpp"
 	"opencv2/imgproc/imgproc.hpp"
+	"opencv2/ml/ml.hpp"
+	"SVMLearningModel.h"
 
-1366607556 source:/home/frederick/Code/OpenHGR/Recognition/main.cpp
+1366611552 source:/home/frederick/Code/OpenHGR/Recognition/main.cpp
 	<iostream>
 	<stdio.h>
 	<unistd.h>
@@ -249,6 +259,7 @@
 	<HandThresholderFactory.h>
 	<HandDetectorFactory.h>
 	<GestureRecognizerFactory.h>
+	<boost/filesystem.hpp>
 
 1364867286 source:/home/frederick/Code/OpenHGR/Recognition/src/ContourComparisonHandDetector.cpp
 	"ContourComparisonHandDetector.h"

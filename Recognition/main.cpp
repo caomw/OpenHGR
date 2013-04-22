@@ -13,9 +13,11 @@
 #include <HandThresholderFactory.h>
 #include <HandDetectorFactory.h>
 #include <GestureRecognizerFactory.h>
+#include <boost/filesystem.hpp>
 
 using namespace std;
 using namespace cv;
+using namespace boost::filesystem;
 
 int main()
 {
@@ -25,7 +27,11 @@ int main()
 
     vector<string> trainingFolders;
 
-    CvCapture* capture;
+    trainingFolders.push_back("/home/frederick/Code/OpenHGR/data/Dataset2/1.DataSet");
+    trainingFolders.push_back("/home/frederick/Code/OpenHGR/data/Dataset2/2.DataSet");
+    string testingFolder = "/home/frederick/Code/OpenHGR/data/Benchmarks/2extracted";
+
+    CvCapture* capture = 0;
     Mat frame, f, thresholdFrame;
 
     // Filter factories
@@ -34,7 +40,7 @@ int main()
     GestureRecognizerFactory grf;
 
     // Filters
-    AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_HSV);
+    AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_LUMA);
     AbstractHandDetector* handDetector = hdf.createInstance(CONTOUR_COMPARISON);
     AbstractGestureRecognizer* gestureRecognizer = grf.createInstance(SIFT_Recognizer,trainingFolders);
 
@@ -43,13 +49,13 @@ int main()
     handDetector->setDebug(1);
     //gestureRecognizer->setDebug(1);
 
-    int video = 1;
+    int video = 0;
 
     if ( video )
     {
         capture = cvCaptureFromFile(benchmark_file);
     }
-    else
+    else if (testingFolder == "")
     {
         //capture = cvCaptureFromCAM( -1 );
         capture = cvCreateCameraCapture(0);
@@ -91,6 +97,31 @@ int main()
             if( (char)c == 'c' ) { break; }
             //sleep(1);
         }
+    }
+    else
+    {
+        //Benchmark photo mode bitch
+        cout << "testing photos" << endl;
+
+        int cptr = 0;
+        for (directory_iterator iter = directory_iterator(path(testingFolder)); iter != directory_iterator(); iter++)
+        {
+            cptr++;
+            directory_entry entry = *iter;
+            path entryPath = entry.path();
+            Mat img = imread(entryPath.string());
+
+            thresholdFrame = handThresholder->thresholdHand(img);
+            Rect handRect = handDetector->detectHand(thresholdFrame);
+            Mat tmp = img(handRect);
+            string tmpStr = entryPath.filename().c_str();
+            string folder = "/home/frederick/Code/OpenHGR/Rapport/HandSegmentationResults/" + tmpStr;
+
+
+            cout << folder << endl;
+            imwrite( folder, tmp );
+        }
+
     }
 
     return 0;
