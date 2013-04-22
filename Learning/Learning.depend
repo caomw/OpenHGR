@@ -2,7 +2,7 @@
 1361735814 source:/home/mathieu/Desktop/OpenHGR/Learning/main.cpp
 	<iostream>
 
-1366518441 source:/home/frederick/Code/OpenHGR/Learning/main.cpp
+1366602562 source:/home/frederick/Code/OpenHGR/Learning/main.cpp
 	<fstream>
 	<iostream>
 	"AlgorithmTester.h"
@@ -99,7 +99,7 @@
 	<string>
 	<iostream>
 
-1366518249 source:/home/frederick/Code/OpenHGR/Learning/src/AlgorithmTester.cpp
+1366602587 source:/home/frederick/Code/OpenHGR/Learning/src/AlgorithmTester.cpp
 	"AlgorithmTester.h"
 	<vector>
 	<boost/filesystem.hpp>
@@ -112,10 +112,11 @@
 	"opencv2/imgproc/imgproc.hpp"
 	"opencv2/ml/ml.hpp"
 	<boost/timer.hpp>
+	<boost/lexical_cast.hpp>
 	"AbstractLearningModel.h"
 	"SVMLearningModel.h"
 
-1366518230 /home/frederick/Code/OpenHGR/Learning/include/AlgorithmTester.h
+1366598823 /home/frederick/Code/OpenHGR/Learning/include/AlgorithmTester.h
 	<vector>
 	<boost/filesystem.hpp>
 	<opencv2/opencv.hpp>
@@ -194,19 +195,19 @@
 	<set>
 	<valarray>
 
-1366488570 source:/home/frederick/Code/OpenHGR/Learning/src/SVMLearningModel.cpp
+1366473865 source:/home/frederick/Code/OpenHGR/Learning/src/SVMLearningModel.cpp
 	"SVMLearningModel.h"
 	<opencv2/opencv.hpp>
 	"opencv2/core/core.hpp"
 	"opencv2/ml/ml.hpp"
 
-1366488570 /home/frederick/Code/OpenHGR/Learning/include/SVMLearningModel.h
+1366473836 /home/frederick/Code/OpenHGR/Learning/include/SVMLearningModel.h
 	"AbstractLearningModel.h"
 	<opencv2/opencv.hpp>
 	"opencv2/core/core.hpp"
 	"opencv2/ml/ml.hpp"
 
-1366488570 /home/frederick/Code/OpenHGR/Learning/include/AbstractLearningModel.h
+1366486068 /home/frederick/Code/OpenHGR/Learning/include/AbstractLearningModel.h
 	<opencv2/opencv.hpp>
 	"opencv2/core/core.hpp"
 

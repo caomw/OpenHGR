@@ -41,6 +41,9 @@ class AlgorithmTester
         int gesturesCptr[NBR_GESTURE][NBR_GESTURE+1];
         int gesturesChangedcptr = 0;
 
+        vector<string> wrongGestures;
+        vector<string> filenames;
+
     protected:
 
 
@@ -69,6 +72,7 @@ class AlgorithmTester
         int dictionarySize;
         int retries = 1;
         int flags = KMEANS_PP_CENTERS;
+
 
 
 

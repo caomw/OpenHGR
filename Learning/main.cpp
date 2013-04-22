@@ -11,7 +11,7 @@ int main()
     {
         for (int j=0; j<3;j++)
         {
-            ofstream out ( "/home/frederick/Code/OpenHGR/resultsSecondPass.csv", ios::app );
+            ofstream out ( "/home/frederick/Code/OpenHGR/resultsDetailsWrong.csv", ios::app );
 
             cout << "Testing K = " << i << endl;
             AlgorithmTester* test;
@@ -19,8 +19,8 @@ int main()
             string testFolder;
             vector<int> secondTraining;
 
-            secondTraining.push_back(1);
-            secondTraining.push_back(5);
+            //secondTraining.push_back(1);
+            //secondTraining.push_back(5);
 
             if (j ==0)
             {
@@ -62,6 +62,10 @@ int main()
                 }
             }
             out << endl;
+
+            for (int k=0; k < test->wrongGestures.size(); k++)
+                out << test->wrongGestures.at(k) << endl;
+
             out.close();
 
 

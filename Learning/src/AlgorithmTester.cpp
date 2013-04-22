@@ -11,6 +11,7 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/ml/ml.hpp"
 #include <boost/timer.hpp>
+#include <boost/lexical_cast.hpp>
 
 #include "AbstractLearningModel.h"
 #include "SVMLearningModel.h"
@@ -203,6 +204,10 @@ void AlgorithmTester::extractBOWDescriptor(const path& basepath, bool training, 
 						    descriptors2.push_back(bowDescriptor2);
 						    labels2.push_back(label);
 						}
+						else if (!training)
+						{
+                            filenames.push_back(entryPath.filename().c_str());
+						}
 
 					}
 				}
@@ -303,6 +308,13 @@ void AlgorithmTester::run()
     {
         gesturesCptr[(int)groundTruth.at<float>(i,0)-1][(int)(results.at<float>(i,0))]++;
         gesturesCptr[(int)groundTruth.at<float>(i,0)-1][0]++;
+
+
+        if ((int)groundTruth.at<float>(i,0) != (int)results.at<float>(i,0) && ((int)results.at<float>(i,0) == 1 || (int)results.at<float>(i,0) == 5))
+        {
+            string tmp = "" + boost::lexical_cast<std::string>((int)groundTruth.at<float>(i,0)) + "-" + boost::lexical_cast<std::string>((int)results.at<float>(i,0)) + "-" + boost::lexical_cast<std::string>(filenames.at(i));
+            wrongGestures.push_back(tmp);
+        }
 
     }
 
