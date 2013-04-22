@@ -13,11 +13,11 @@ GestureRecognizerFactory::~GestureRecognizerFactory()
     //dtor
 }
 
-AbstractGestureRecognizer* GestureRecognizerFactory::createInstance ( GestureRecognizerType type )
+AbstractGestureRecognizer* GestureRecognizerFactory::createInstance ( GestureRecognizerType type, vector<string> trainingFolders )
 {
     switch ( type )
     {
-        case SIFT:
-        default: return new SIFTGestureRecognizer ();
+        case SIFT_Recognizer:
+        default: return new SIFTGestureRecognizer (SURF_Detector,SURF_Extractor,FlannBased,SVM_Model,2500,trainingFolders);
     }
 }

@@ -9,7 +9,7 @@
 class AbstractGestureRecognizer : public AbstractFilter
 {
     public:
-        virtual std::string recognizeGesture ( cv::Mat input, cv::Rect roi ) = 0;
+        virtual float recognizeGesture ( cv::Mat input, cv::Rect roi ) = 0;
     protected:
     private:
 };

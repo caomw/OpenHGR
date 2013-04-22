@@ -23,6 +23,8 @@ int main()
     //char* benchmark_file = "../data/benchmark1.avi";
     //char* benchmark_file = "../data/benchmark3.avi";
 
+    vector<string> trainingFolders;
+
     CvCapture* capture;
     Mat frame, f, thresholdFrame;
 
@@ -34,7 +36,7 @@ int main()
     // Filters
     AbstractHandThresholder* handThresholder = htf.createInstance(HAAR_HSV);
     AbstractHandDetector* handDetector = hdf.createInstance(CONTOUR_COMPARISON);
-    AbstractGestureRecognizer* gestureRecognizer = grf.createInstance(SIFT);
+    AbstractGestureRecognizer* gestureRecognizer = grf.createInstance(SIFT_Recognizer,trainingFolders);
 
     // Debugging
     handThresholder->setDebug(1);
@@ -66,7 +68,7 @@ int main()
             {
                 thresholdFrame = handThresholder->thresholdHand(frame);
                 Rect handRect = handDetector->detectHand(thresholdFrame);
-                string gesture = gestureRecognizer->recognizeGesture(frame, handRect);
+                float gesture = gestureRecognizer->recognizeGesture(frame, handRect);
 
                 //cout << gesture << endl;
 

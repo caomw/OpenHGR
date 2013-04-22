@@ -20,6 +20,8 @@
 				</Compiler>
 				<Linker>
 					<Add option="`pkg-config opencv --libs`" />
+					<Add library="/usr/lib/libboost_system.so" />
+					<Add library="boost_filesystem" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -43,6 +45,7 @@
 		<Unit filename="include/AbstractGestureRecognizer.h" />
 		<Unit filename="include/AbstractHandDetector.h" />
 		<Unit filename="include/AbstractHandThresholder.h" />
+		<Unit filename="include/AbstractLearningModel.h" />
 		<Unit filename="include/ContourComparisonHandDetector.h" />
 		<Unit filename="include/ConvexHullComparisonHandDetector.h" />
 		<Unit filename="include/GestureRecognizerFactory.h" />
@@ -55,6 +58,7 @@
 		<Unit filename="include/HandDetectorFactory.h" />
 		<Unit filename="include/HandThresholderFactory.h" />
 		<Unit filename="include/SIFTGestureRecognizer.h" />
+		<Unit filename="include/SVMLearningModel.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/AbstractFilter.cpp" />
 		<Unit filename="src/ContourComparisonHandDetector.cpp" />
@@ -69,6 +73,7 @@
 		<Unit filename="src/HandDetectorFactory.cpp" />
 		<Unit filename="src/HandThresholderFactory.cpp" />
 		<Unit filename="src/SIFTGestureRecognizer.cpp" />
+		<Unit filename="src/SVMLearningModel.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

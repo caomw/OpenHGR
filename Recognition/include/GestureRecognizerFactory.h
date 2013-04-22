@@ -2,15 +2,16 @@
 #define GESTURERECOGNIZERFACTORY_H
 
 #include <AbstractGestureRecognizer.h>
+#include <vector>
 
-enum GestureRecognizerType { SIFT };
+enum GestureRecognizerType { SIFT_Recognizer };
 
 class GestureRecognizerFactory
 {
     public:
         GestureRecognizerFactory();
         ~GestureRecognizerFactory();
-        AbstractGestureRecognizer* createInstance ( GestureRecognizerType type );
+        AbstractGestureRecognizer* createInstance ( GestureRecognizerType type, std::vector<std::string> trainingFolders );
     protected:
     private:
 };
