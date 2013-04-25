@@ -1,22 +1,17 @@
-#include "HaarFaceSubstractor.h"
+#include "LBPFaceSubstractor.h"
 #include <iostream>
 #include <stdio.h>
 
 using namespace std;
 using namespace cv;
 
-HaarFaceSubstractor::HaarFaceSubstractor()
+LBPFaceSubstractor::LBPFaceSubstractor()
 {
     if( !face_cascade.load( face_cascade_name ) )
         printf("--(!)Error loading\n");
 }
 
-HaarFaceSubstractor::~HaarFaceSubstractor()
-{
-    //dtor
-}
-
-Mat HaarFaceSubstractor::substractFace ( Mat input, Mat thresholdFrame )
+Mat LBPFaceSubstractor::substractFace ( Mat input, Mat thresholdFrame )
 {
     std::vector<Rect> faces;
     Mat output = input.clone();
@@ -27,7 +22,7 @@ Mat HaarFaceSubstractor::substractFace ( Mat input, Mat thresholdFrame )
     equalizeHist( frame_gray, frame_gray );
 
     // Face detection
-    face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(30, 30) );
+    face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0, Size(80, 80) );
 
     if ( isDebug () )
         debugFrame = input.clone();
@@ -44,7 +39,12 @@ Mat HaarFaceSubstractor::substractFace ( Mat input, Mat thresholdFrame )
     }
 
     if ( isDebug() )
-        imshow("HaarFaceSubstractor", debugFrame);
+        imshow("LBPFaceSubstractor", debugFrame);
 
     return thresholdFrame;
+}
+
+LBPFaceSubstractor::~LBPFaceSubstractor()
+{
+    //dtor
 }

@@ -46,7 +46,7 @@ cv::Rect ContourComparisonHandDetector::detectHand ( cv::Mat input )
                 r = boundingRect(cropContour(contours[i], r ));
                 if ( r.width*r.height >= biggestContour )
                 {
-                    cout << "match : " << match << endl;
+                    //cout << "match : " << match << endl;
                     biggestContour = r.width*r.height;
                     handRect = r;
                 }

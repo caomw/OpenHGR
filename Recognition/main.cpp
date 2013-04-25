@@ -25,7 +25,7 @@ using namespace boost::filesystem;
 int main()
 {
     int id = 1;
-    char* benchmark_file = "../data/Benchmarks/2.avi";
+    char* benchmark_file = "../data/Benchmarks/4.avi";
     //char* benchmark_file = "../data/benchmark1.avi";
     //char* benchmark_file = "../data/benchmark3.avi";
 
@@ -46,7 +46,7 @@ int main()
 
     // Filters
     AbstractHandThresholder* handThresholder = htf.createInstance(LUMA_MEAN_THRESHOLDER);
-    AbstractFaceSubstractor* faceSubstractor = fsf.createInstance(HAAR_FACE_SUBSTRACTOR);
+    AbstractFaceSubstractor* faceSubstractor = fsf.createInstance(LBP_FACE_SUBSTRACTOR);
     AbstractHandDetector* handDetector = hdf.createInstance(CONTOUR_COMPARISON);
     AbstractGestureRecognizer* gestureRecognizer = grf.createInstance(SIFT_Recognizer,trainingFolders);
 
@@ -135,7 +135,7 @@ int main()
 
 
             cout << folder << endl;
-            imwrite( folder, tmp );
+            //imwrite( folder, tmp );
         }
 
     }

@@ -2,6 +2,7 @@
 
 #include <AbstractFaceSubstractor.h>
 #include <HaarFaceSubstractor.h>
+#include <LBPFaceSubstractor.h>
 
 FaceSubstractorFactory::FaceSubstractorFactory()
 {
@@ -17,6 +18,8 @@ AbstractFaceSubstractor* FaceSubstractorFactory::createInstance ( FaceSubstracto
 {
     switch ( type )
     {
+        case LBP_FACE_SUBSTRACTOR:
+                 return new LBPFaceSubstractor();
         case HAAR_FACE_SUBSTRACTOR:
         default: return new HaarFaceSubstractor();
     }

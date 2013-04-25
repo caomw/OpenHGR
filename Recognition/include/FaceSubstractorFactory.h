@@ -3,7 +3,7 @@
 
 #include <AbstractFaceSubstractor.h>
 
-enum FaceSubstractorType { HAAR_FACE_SUBSTRACTOR };
+enum FaceSubstractorType { HAAR_FACE_SUBSTRACTOR, LBP_FACE_SUBSTRACTOR };
 
 class FaceSubstractorFactory
 {
