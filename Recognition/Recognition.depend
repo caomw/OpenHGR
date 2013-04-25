@@ -290,7 +290,7 @@
 1364842246 /home/frederick/Code/OpenHGR/Recognition/include/ConvexHullComparisonHandDetector.h
 	<AbstractHandDetector.h>
 
-1366841239 source:/home/mathieu/Desktop/OpenHGR/Recognition/main.cpp
+1366857396 source:/home/mathieu/Desktop/OpenHGR/Recognition/main.cpp
 	<iostream>
 	<stdio.h>
 	<unistd.h>
@@ -322,7 +322,7 @@
 	"opencv2/imgproc/imgproc.hpp"
 	<stdio.h>
 
-1366833123 /home/mathieu/Desktop/OpenHGR/Recognition/include/HandThresholderFactory.h
+1366854174 /home/mathieu/Desktop/OpenHGR/Recognition/include/HandThresholderFactory.h
 	<AbstractHandThresholder.h>
 
 1364874013 /home/mathieu/Desktop/OpenHGR/Recognition/include/HandDetectorFactory.h
@@ -335,7 +335,7 @@
 1364856216 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/AbstractFilter.cpp
 	"AbstractFilter.h"
 
-1364860434 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/ContourComparisonHandDetector.cpp
+1366841870 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/ContourComparisonHandDetector.cpp
 	"ContourComparisonHandDetector.h"
 	"opencv2/objdetect/objdetect.hpp"
 	"opencv2/highgui/highgui.hpp"
@@ -344,7 +344,7 @@
 	<iostream>
 	<stdio.h>
 
-1364860498 /home/mathieu/Desktop/OpenHGR/Recognition/include/ContourComparisonHandDetector.h
+1366843236 /home/mathieu/Desktop/OpenHGR/Recognition/include/ContourComparisonHandDetector.h
 	<AbstractHandDetector.h>
 
 1364874013 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/ConvexHullComparisonHandDetector.cpp
@@ -459,7 +459,7 @@
 	<ContourComparisonHandDetector.h>
 	<ConvexHullComparisonHandDetector.h>
 
-1366833186 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HandThresholderFactory.cpp
+1366854193 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HandThresholderFactory.cpp
 	<HandThresholderFactory.h>
 	<HSVHandThresholder.h>
 	<HistogramHSVHandThresholder.h>
@@ -467,6 +467,7 @@
 	<YCbCrEllipseHandThresholder.h>
 	<AdaptiveHandThresholder.h>
 	<LumaHandThresholder.h>
+	<LumaMeanHandThresholder.h>
 
 1366832595 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/SIFTGestureRecognizer.cpp
 	"SIFTGestureRecognizer.h"
@@ -639,7 +640,7 @@
 	"opencv2/highgui/highgui.hpp"
 	"opencv2/imgproc/imgproc.hpp"
 
-1366834940 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/YCbCrHandThresholder.cpp
+1366846376 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/YCbCrHandThresholder.cpp
 	"YCbCrHandThresholder.h"
 	<iostream>
 	<stdio.h>
@@ -647,7 +648,7 @@
 	"opencv2/highgui/highgui.hpp"
 	"opencv2/imgproc/imgproc.hpp"
 
-1366834709 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HaarFaceSubstractor.cpp
+1366841274 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/HaarFaceSubstractor.cpp
 	"HaarFaceSubstractor.h"
 	<iostream>
 	<stdio.h>
@@ -669,4 +670,16 @@
 
 1366834275 /home/mathieu/Desktop/OpenHGR/Recognition/include/FaceSubstractorFactory.h
 	<AbstractFaceSubstractor.h>
+
+1366854074 /home/mathieu/Desktop/OpenHGR/Recognition/include/LumaMeanHandThresholder.h
+	<AbstractHandThresholder.h>
+	"opencv2/imgproc/imgproc.hpp"
+
+1366854430 source:/home/mathieu/Desktop/OpenHGR/Recognition/src/LumaMeanHandThresholder.cpp
+	"LumaMeanHandThresholder.h"
+	<iostream>
+	<stdio.h>
+	"opencv2/objdetect/objdetect.hpp"
+	"opencv2/highgui/highgui.hpp"
+	"opencv2/imgproc/imgproc.hpp"
 

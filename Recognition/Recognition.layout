@@ -1,64 +1,109 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
+	<File name="include/AbstractFaceSubstractor.h" open="0" top="0" tabpos="0">
+		<Cursor position="373" topLine="0" />
+	</File>
 	<File name="include/AbstractFilter.h" open="0" top="0" tabpos="0">
 		<Cursor position="185" topLine="0" />
 	</File>
-	<File name="include/AbstractGestureRecognizer.h" open="1" top="0" tabpos="6">
-		<Cursor position="260" topLine="0" />
+	<File name="include/AbstractGestureRecognizer.h" open="0" top="0" tabpos="6">
+		<Cursor position="104" topLine="0" />
 	</File>
 	<File name="include/AbstractHandDetector.h" open="0" top="0" tabpos="0">
 		<Cursor position="215" topLine="0" />
 	</File>
-	<File name="include/AbstractHandThresholder.h" open="1" top="0" tabpos="8">
+	<File name="include/AbstractHandThresholder.h" open="0" top="0" tabpos="8">
 		<Cursor position="213" topLine="0" />
 	</File>
+	<File name="include/AdaptiveHandThresholder.h" open="0" top="0" tabpos="0">
+		<Cursor position="436" topLine="0" />
+	</File>
 	<File name="include/ContourComparisonHandDetector.h" open="0" top="0" tabpos="3">
-		<Cursor position="336" topLine="0" />
+		<Cursor position="736" topLine="0" />
 	</File>
 	<File name="include/ConvexHullComparisonHandDetector.h" open="0" top="0" tabpos="2">
 		<Cursor position="356" topLine="0" />
 	</File>
-	<File name="include/GestureRecognizerFactory.h" open="1" top="0" tabpos="5">
-		<Cursor position="401" topLine="0" />
+	<File name="include/FaceSubstractorFactory.h" open="0" top="0" tabpos="0">
+		<Cursor position="105" topLine="0" />
 	</File>
-	<File name="include/HaarAdaptiveHandThresholder.h" open="0" top="0" tabpos="0">
-		<Cursor position="746" topLine="0" />
+	<File name="include/GestureRecognizerFactory.h" open="0" top="0" tabpos="5">
+		<Cursor position="312" topLine="0" />
 	</File>
-	<File name="include/HaarHSVHandThresholder.h" open="0" top="0" tabpos="0">
-		<Cursor position="526" topLine="0" />
+	<File name="include/HSVHandThresholder.h" open="0" top="0" tabpos="0">
+		<Cursor position="455" topLine="0" />
 	</File>
-	<File name="include/HaarHistogramHSVHandThresholder.h" open="0" top="0" tabpos="3">
-		<Cursor position="30" topLine="0" />
-	</File>
-	<File name="include/HaarLumaHandThresholder.h" open="1" top="0" tabpos="12">
-		<Cursor position="0" topLine="0" />
-	</File>
-	<File name="include/HaarYCbCrEllipseHandThresholder.h" open="0" top="0" tabpos="0">
-		<Cursor position="689" topLine="0" />
+	<File name="include/HaarFaceSubstractor.h" open="0" top="0" tabpos="0">
+		<Cursor position="404" topLine="0" />
 	</File>
 	<File name="include/HandDetectorFactory.h" open="0" top="0" tabpos="0">
 		<Cursor position="99" topLine="0" />
 	</File>
-	<File name="include/HandThresholderFactory.h" open="1" top="0" tabpos="9">
-		<Cursor position="143" topLine="0" />
+	<File name="include/HandThresholderFactory.h" open="0" top="0" tabpos="9">
+		<Cursor position="286" topLine="0" />
 	</File>
-	<File name="include/SIFTGestureRecognizer.h" open="1" top="0" tabpos="1">
+	<File name="include/HistogramHSVHandThresholder.h" open="0" top="0" tabpos="3">
+		<Cursor position="510" topLine="0" />
+	</File>
+	<File name="include/LumaHandThresholder.h" open="0" top="0" tabpos="12">
+		<Cursor position="391" topLine="0" />
+	</File>
+	<File name="include/SIFTGestureRecognizer.h" open="0" top="0" tabpos="1">
 		<Cursor position="1273" topLine="15" />
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="2848" topLine="30" />
+	<File name="include/YCbCrEllipseHandThresholder.h" open="0" top="0" tabpos="0">
+		<Cursor position="419" topLine="0" />
 	</File>
-	<File name="src/GestureRecognizerFactory.cpp" open="1" top="0" tabpos="4">
+	<File name="include/YCbCrHandThresholder.h" open="0" top="0" tabpos="0">
+		<Cursor position="520" topLine="0" />
+	</File>
+	<File name="main.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="3156" topLine="82" />
+	</File>
+	<File name="src/AdaptiveHandThresholder.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="1074" topLine="0" />
+	</File>
+	<File name="src/ContourComparisonHandDetector.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="186" topLine="39" />
+	</File>
+	<File name="src/FaceSubstractorFactory.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="407" topLine="0" />
+	</File>
+	<File name="src/GestureRecognizerFactory.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="263" topLine="0" />
 	</File>
-	<File name="src/HaarLumaHandThresholder.cpp" open="1" top="0" tabpos="11">
-		<Cursor position="467" topLine="0" />
+	<File name="src/HSVHandThresholder.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="742" topLine="0" />
 	</File>
-	<File name="src/SIFTGestureRecognizer.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="4572" topLine="119" />
+	<File name="src/HaarFaceSubstractor.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="129" topLine="0" />
 	</File>
-	<File name="src/SVMLearningModel.cpp" open="1" top="0" tabpos="7">
+	<File name="src/HandDetectorFactory.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="288" topLine="0" />
+	</File>
+	<File name="src/HandThresholderFactory.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="1066" topLine="0" />
+	</File>
+	<File name="src/HistogramHSVHandThresholder.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="244" topLine="0" />
+	</File>
+	<File name="src/LumaHandThresholder.cpp" open="0" top="0" tabpos="11">
+		<Cursor position="201" topLine="0" />
+	</File>
+	<File name="src/LumaMeanHandThresholder.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="710" topLine="0" />
+	</File>
+	<File name="src/SIFTGestureRecognizer.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="4572" topLine="0" />
+	</File>
+	<File name="src/SVMLearningModel.cpp" open="0" top="0" tabpos="7">
 		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="src/YCbCrEllipseHandThresholder.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="1060" topLine="8" />
+	</File>
+	<File name="src/YCbCrHandThresholder.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="755" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

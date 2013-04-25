@@ -5,6 +5,7 @@
 #include <YCbCrEllipseHandThresholder.h>
 #include <AdaptiveHandThresholder.h>
 #include <LumaHandThresholder.h>
+#include <LumaMeanHandThresholder.h>
 
 HandThresholderFactory::HandThresholderFactory()
 {
@@ -30,6 +31,8 @@ AbstractHandThresholder* HandThresholderFactory::createInstance ( HandThresholde
             return new AdaptiveHandThresholder();
         case LUMA_THRESHOLDER:
             return new LumaHandThresholder();
+        case LUMA_MEAN_THRESHOLDER:
+            return new LumaMeanHandThresholder();
         case HSV_THRESHOLDER:
         default: return new HSVHandThresholder ();
     }

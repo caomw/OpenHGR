@@ -20,7 +20,7 @@ class ContourComparisonHandDetector : public AbstractHandDetector
         std::vector<std::vector<cv::Point> > templates;
 
         double shapeMatchThreshold = 0.20;
-        double widthHeightRadio = 1.1;
+        double widthHeightRadio = 1.2;
 };
 
 #endif // CONTOURCOMPARISONHANDDETECTOR_H

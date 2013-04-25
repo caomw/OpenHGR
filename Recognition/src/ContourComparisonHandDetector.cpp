@@ -36,15 +36,14 @@ cv::Rect ContourComparisonHandDetector::detectHand ( cv::Mat input )
     {
         Rect r = boundingRect(contours[i]);
         r.height = r.width*widthHeightRadio;
-        vector<Point> newContour = cropContour(contours[i], r );
 
         for ( int j = 0; j < templates.size(); j ++ )
         {
-            double match = matchShapes ( newContour, templates[j], CV_CONTOURS_MATCH_I3, 0 );
+            double match = matchShapes ( contours[i], templates[j], CV_CONTOURS_MATCH_I3, 0 );
 
             if ( match < shapeMatchThreshold && match > 0 )
             {
-                r = boundingRect(newContour);
+                r = boundingRect(cropContour(contours[i], r ));
                 if ( r.width*r.height >= biggestContour )
                 {
                     cout << "match : " << match << endl;
@@ -70,10 +69,10 @@ cv::Rect ContourComparisonHandDetector::detectHand ( cv::Mat input )
             {
                 Rect r = boundingRect(contours[i]);
                 r.height = r.width * widthHeightRadio;
-                vector<Point> newContour = cropContour(contours[i], r );
-
+                //vector<Point> newContour = cropContour(contours[i], r );
+                vector<Point> newContour = contours[i];
                 double match = matchShapes ( newContour, templates[j], CV_CONTOURS_MATCH_I3, 0 );
-                if ( match < shapeMatchThreshold && match > 0 )
+                if ( /*match < shapeMatchThreshold && */match > 0 )
                 {
                     r = boundingRect(newContour);
                     rectangle(drawing, Point(r.x, r.y), Point(r.x+r.width, r.y+r.height), Scalar(255), 2, 8 );
