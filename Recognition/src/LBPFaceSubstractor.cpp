@@ -19,7 +19,7 @@ Mat LBPFaceSubstractor::substractFace ( Mat input, Mat thresholdFrame )
     Mat debugFrame;
 
     cvtColor( input, frame_gray, CV_BGR2GRAY );
-    equalizeHist( frame_gray, frame_gray );
+    //equalizeHist( frame_gray, frame_gray );
 
     // Face detection
     face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0, Size(80, 80) );

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sstream>
+#include <sys/time.h>
 
 // OpenCV includes
 #include "opencv2/highgui/highgui.hpp"
@@ -25,7 +26,8 @@ using namespace boost::filesystem;
 int main()
 {
     int id = 1;
-    char* benchmark_file = "../data/Benchmarks/4.avi";
+    int frameCount = 0;
+    char* benchmark_file = "../data/Benchmarks/1.avi";
     //char* benchmark_file = "../data/benchmark1.avi";
     //char* benchmark_file = "../data/benchmark3.avi";
 
@@ -45,15 +47,15 @@ int main()
     GestureRecognizerFactory grf;
 
     // Filters
-    AbstractHandThresholder* handThresholder = htf.createInstance(LUMA_MEAN_THRESHOLDER);
-    AbstractFaceSubstractor* faceSubstractor = fsf.createInstance(LBP_FACE_SUBSTRACTOR);
+    AbstractHandThresholder* handThresholder = htf.createInstance(HSV_THRESHOLDER);
+    AbstractFaceSubstractor* faceSubstractor = fsf.createInstance(HAAR_FACE_SUBSTRACTOR);
     AbstractHandDetector* handDetector = hdf.createInstance(CONTOUR_COMPARISON);
     AbstractGestureRecognizer* gestureRecognizer = grf.createInstance(SIFT_Recognizer,trainingFolders);
 
     // Debugging
     //handThresholder->setDebug(1);
-    faceSubstractor->setDebug(1);
-    handDetector->setDebug(1);
+    //faceSubstractor->setDebug(1);
+    //handDetector->setDebug(1);
     //gestureRecognizer->setDebug(1);
 
     int video = 1;
@@ -75,6 +77,8 @@ int main()
         while( true )
         {
             f = cvQueryFrame( capture );
+
+            frameCount ++;
             flip(f,frame,1);
 
             if( !frame.empty() )
@@ -140,5 +144,6 @@ int main()
 
     }
 
+    cout << frameCount << " frames." << endl;
     return 0;
 }
